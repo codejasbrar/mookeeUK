@@ -1,0 +1,175 @@
+
+{%- assign list = linklists[section.settings.footer_linklist] -%}
+
+{%- if section.settings.copyright_align != '' -%}
+  {%- case section.settings.footer_social_hook -%}
+  {%- when 'cp_bottom' -%}
+  <div id="footer-copyright" class="text-{{section.settings.copyright_align}}{%- if section.settings.visible_on_mobile == false -%}{{" hidden-xs"}}{%- endif-%}" data-section-id="{{ section.id }}" data-section-type="footer-copyright">
+    {%- if section.settings.copyright_custom_1 != blank -%}
+    <div>{{section.settings.copyright_custom_1}}</div>
+    {%- endif -%}
+    {%- if section.settings.copyright_custom_2 != blank -%}
+    <div>{{section.settings.copyright_custom_2}}</div>
+    {%- endif -%}
+    {%- if section.settings.copyright_custom_3 != blank -%}
+    <div>{{section.settings.copyright_custom_3}}</div>
+    {%- endif -%}
+    {%-  include "payment-icons" -%}
+    {%- include 'footer-cp-block-social-icon' -%}
+  </div>
+  {%- when 'cp_left' -%}
+  <div id="footer-copyright" class="col-sm-6 text-left{%- if section.settings.visible_on_mobile == false -%}{{" hidden-xs"}}{%- endif-%}" data-section-id="{{ section.id }}" data-section-type="footer-copyright">{%- include 'footer-cp-block-social-icon' -%}</div>
+  <div id="footer-copyright" class="col-sm-6 text-right{%- if section.settings.visible_on_mobile == false -%}{{" hidden-xs"}}{%- endif-%}" data-section-id="{{ section.id }}" data-section-type="footer-copyright">
+    {%- if section.settings.copyright_custom_1 != blank -%}
+    <div>{{section.settings.copyright_custom_1}}</div>
+    {%- endif -%}
+    {%- if section.settings.copyright_custom_2 != blank -%}
+    <div>{{section.settings.copyright_custom_2}}</div>
+    {%- endif -%}
+    {%- if section.settings.copyright_custom_3 != blank -%}
+    <div>{{section.settings.copyright_custom_3}}</div>
+    {%- endif -%}
+    {%-  include "payment-icons" -%}</div>
+  {%- when 'cp_right' -%}
+  <div id="footer-copyright" class="col-sm-6 text-left{%- if section.settings.visible_on_mobile == false -%}{{" hidden-xs"}}{%- endif-%}" data-section-id="{{ section.id }}" data-section-type="footer-copyright">
+    {%- if section.settings.copyright_custom_1 != blank -%}
+    <div>{{section.settings.copyright_custom_1}}</div>
+    {%- endif -%}
+    {%- if section.settings.copyright_custom_2 != blank -%}
+    <div>{{section.settings.copyright_custom_2}}</div>
+    {%- endif -%}
+    {%- if section.settings.copyright_custom_3 != blank -%}
+    <div>{{section.settings.copyright_custom_3}}</div>
+    {%- endif -%}
+    {%-  include "payment-icons" -%}
+  </div>
+  <div id="footer-copyright" class="col-sm-6 text-right{%- if section.settings.visible_on_mobile == false -%}{{" hidden-xs"}}{%- endif-%}" data-section-id="{{ section.id }}" data-section-type="footer-copyright">{%- include 'footer-cp-block-social-icon' -%}</div>
+  {%- else -%}
+  <div id="footer-copyright" class="col-sm-12 text-{{section.settings.copyright_align}}{%- if section.settings.visible_on_mobile == false -%}{{" hidden-xs"}}{%- endif-%}" data-section-id="{{ section.id }}" data-section-type="footer-copyright">
+    <ul class="footer_link_list">
+      {%- for link in list.links -%}
+      <li><a href="{{link.url}}">{{link.title}}</a></li>
+      {%- endfor -%}
+    </ul>
+    <ul class="copyright_footer">
+    {%- if section.settings.copyright_custom_1 != blank -%}
+    <li>{{section.settings.copyright_custom_1}}</li>
+    {%- endif -%}
+    {%- if section.settings.copyright_custom_2 != blank -%}
+    <li>{{section.settings.copyright_custom_2}}</li>
+    {%- endif -%}
+    {%- if section.settings.copyright_custom_3 != blank -%}
+    <li>{{section.settings.copyright_custom_3}}</li>
+    {%- endif -%}
+    </ul>
+    {%-  include "payment-icons" -%}
+  </div>
+  {%- endcase -%}
+{%- endif -%}
+{% schema %}
+  {
+    "name": "Footer Copyright",
+	"class": "index-section section-wrapper copyright",
+    "settings": [
+		{
+		  "type": "header",
+          "content": "General"
+		},
+        {
+        "type": "select",
+        "id": "copyright_align",
+        "label": "Alignment",
+        "options": [
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            },
+            {
+              "value": "",
+              "label": "Disabled"
+            }
+          ]
+        },
+        {
+          "type": "textarea",
+          "id": "copyright_custom_1",
+          "label": "Content 1",
+		  "default": "Register Company 12345678"
+        },
+		{
+          "type": "textarea",
+          "id": "copyright_custom_2",
+          "label": "Content 2",
+		  "default": "Registered Office Here:"
+        },
+		{
+          "type": "textarea",
+          "id": "copyright_custom_3",
+          "label": "Content 3",
+		  "default": "Copyright © 2017, Your Store. All Rights Reserved."
+        },
+		{
+          "type": "link_list",
+          "id": "footer_linklist",
+          "label": "Bottom Footer link list"
+        },		
+		{
+		  "type": "header",
+          "content": "Social Icons"
+		},
+        {
+          "type": "select",
+          "id": "footer_social_hook",
+          "label": "Position",
+          "options": [
+            {			
+              "value": "center",
+              "label": "Hidden"
+            },
+            {
+              "value": "cp_bottom",
+              "label": "Bottom"
+            },
+            {
+              "value": "cp_left",
+              "label": "Left"
+            },
+            {
+              "value": "cp_right",
+              "label": "Right"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "footer_social_heading",
+          "label": "Heading",
+		  "default": "Follow Us"
+        },
+        {
+          "type": "text",
+          "id": "footer_social_size",
+          "label": "Icon Size (in pixels)",
+		  "default": "26"
+        },
+		{
+		  "type": "header",
+          "content": "Payment Image"
+		},
+        {
+          "type": "image_picker",
+          "id": "payment_image",
+          "label": "Upload Image"
+        }
+		
+	]
+  }
+{% endschema %}

@@ -1,0 +1,209 @@
+<style>
+  {%- if section.settings.bg_color != blank -%}
+  #primary-{{section.id}} .mobile-nav-wrapper{
+    background-color: {{section.settings.bg_color}}
+  }
+  {%- endif -%}
+  {%- if section.settings.content_color != blank -%}
+  .mobile-nav .mobile-nav__item,
+  .mobile-nav .mobile-nav__item a {
+    color: {{section.settings.content_color}}	
+  }
+  {%- endif -%}
+  {%- if section.settings.border_color != blank -%} 
+  .mobile-nav .mobile-nav__item {
+    border-color: {{section.settings.border_color}}
+  }
+  {%- endif -%}
+</style>
+<div id="primary-{{section.id}}"  data-section-id="{{ section.id }}" data-section-type="mobile-nav-section">
+  <nav class="mobile-nav-wrapper">
+     <h3 class="mob_drower_title"><a href="https://mokeeuk.myshopify.com" title="MokeeUK"><img class="" src="//cdn.shopify.com/s/files/1/0255/4029/6738/files/logo.png?v=1565088953" style="max-width:150px;" title="MokeeUK" alt="MokeeUK">
+      </a></h3>
+            <div class="mobile-nav-icon">
+          <button type="button"><img class="" src="{{ 'mob_close.png' | asset_img_url : 'master' }}"></button>
+        </div>
+    <ul class="mobile-nav first_nav">
+     
+     {%- if section.settings.linklist != blank -%}
+        {%- for link in linklists[section.settings.linklist].links -%}
+          {%- include 'mobile-navigation-link' -%}
+        {%- endfor -%}
+      {%- endif -%}
+    </ul>
+    <ul class="mobile-nav second_nav">
+       {%- if section.settings.linklist != blank -%}
+        {%- for link in linklists[section.settings.linklist1].links -%}
+          {%- include 'mobile-navigation-link' -%}
+        {%- endfor -%}
+      {%- endif -%}
+      
+      
+      {% comment %}
+      {%- if settings.wishlist_enable and settings.wishlist_page -%}
+      <li class="mobile-nav__item">
+        <a href="/pages/{{ settings.wishlist_page }}" class="mobile-nav__link">{{ 'general.top.wishlist' | t }}</a>
+      </li>
+      {%- endif -%}
+      {% endcomment %}
+      {%- if settings.show_multiple_currencies -%}
+      <li class="mobile-nav__item mobile-nav-currency">
+        {%- include 'currencies-switcher', _has_language: false -%}
+      </li>
+      {%- endif -%}
+      {% comment %}
+      <li class="mobile-nav__item mobile-nav-language">
+        <div class="dropdown language__picker">
+          <a href="javascript:void(0);" class="dropdown-toggle language_wrapper" data-hover="dropdown" data-toggle="dropdown">
+            <div class="language__current notranslate"></div>
+          </a>
+          <ul class="dropdown-menu language__switcher">
+          </ul>
+        </div>
+      </li>
+      {% endcomment %}
+    </ul>
+    <ul class="mobile-nav frith_nav">
+     
+     {%- if section.settings.linklist != blank -%}
+        {%- for link in linklists[section.settings.linklist2].links -%}
+          {%- include 'mobile-navigation-link' -%}
+        {%- endfor -%}
+      {%- endif -%}
+      {%- if shop.customer_accounts_enabled -%}
+      <li class="mobile-nav__item">
+        <a href="/account" class="mobile-nav__link">
+          {%- if customer -%}
+          MY ACCOUNT
+          {%- else -%}
+           LOGIN
+          {%- endif -%}
+        </a>
+      </li>
+      <li class="mobile-nav__item">
+        <a href="/account" class="mobile-nav__link">
+          {%- if customer -%}
+          {{'customer.logout.title' | t | customer_logout_link}}
+          {%- else -%}
+          REGISTER
+          {%- endif -%}
+        </a>
+      </li>
+      {%- endif -%}
+    </ul>
+  </nav>
+  <ul class="mobile-nav-bar">
+    <li class=" mobile-nav-icon">
+    <img class="" src="{{ 'mob_tro_icon.png' | asset_img_url : 'master' }}">
+    </li>
+    <li class="mob_logo">
+      <div class="mobile-nav-logos text-center">
+      <a href="{{shop.url}}" title="{{ shop.name | escape }}">
+        {%- assign _logo = "itg4logo.png" | asset_img_url: 'master'  -%}
+        {%- if settings.main_logo != blank -%}
+        {%- assign _logo = settings.main_logo | img_url: 'master' -%}
+        {%- endif -%}
+        <img src="{{ _logo }}"{{' '}}{%-if settings.mobile_logo_max_width != blank -%}style="max-width:{{settings.mobile_logo_max_width}}px;"{%-endif-%}{{' '}}title="{{ shop.name | escape }}" alt="{{ shop.name | escape }}" />
+      </a>
+  </div>
+    </li>
+    <li class="mobile-nav-item mobile-nav-search">
+      <svg><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#global__symbols-search"></use></svg>
+    </li>
+    {% comment %}
+    <li class="mobile-nav-item mobile-nav-profile">
+      <a href="/account"><svg><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#global__symbols-profile"></use></svg></a>
+    </li>
+    {% endcomment %}
+    <li class=" mobile-nav-cart_icon">
+      <a href="/cart" class="tdf_cart_icon">
+        <span class="basket_icon" style="background:url('//cdn.shopify.com/s/files/1/0255/4029/6738/files/011010101_small.png?v=1565335960')"></span>
+<!--          <span class="total_count_ajax">{{ cart.item_count }}</span> -->
+        <div id="cart_block" class="dropdown">
+        <i class="cart-count"><span class="total_count_ajax">{{ cart.item_count }}</span></i>
+        </div>
+      </a>
+    </li>
+  </ul>
+  <form action="/search" method="get" role="search" class="mobile-nav-search-form">
+    <div class="mobile-nav-search-close"><span></span></div>
+    <input type="search" name="q" class="input-block-level search-query" placeholder="{{ 'search.general.placeholder' | t }}" />
+    <div class="autocomplete-results"></div>
+    <input type="hidden" name="type" value="product" />
+  </form>
+  {% comment %}
+  <div class="mobile-nav-logo text-center">
+    <div class="container">
+      <a href="{{shop.url}}" title="{{ shop.name | escape }}">
+        {%- assign _logo = "itg4logo.png" | asset_img_url: 'master'  -%}
+        {%- if settings.main_logo != blank -%}
+        {%- assign _logo = settings.main_logo | img_url: 'master' -%}
+        {%- endif -%}
+        <img src="{{ _logo }}"{{' '}}{%-if settings.mobile_logo_max_width != blank -%}style="max-width:{{settings.mobile_logo_max_width}}px;"{%-endif-%}{{' '}}title="{{ shop.name | escape }}" alt="{{ shop.name | escape }}" />
+      </a>
+    </div>
+  </div>
+  {% endcomment %}
+  {% comment %}
+  <div class="mobile-nav-logo text-center">
+    <div class="container">
+      <a href="{{shop.url}}" title="{{ shop.name | escape }}">
+        {%- if settings.main_logo != blank -%}
+        {%- assign _logo = settings.main_logo | img_url: 'master' -%}
+        <img src="{{ _logo }}"{{' '}}{%-if settings.mobile_logo_max_width != blank -%}style="max-width:{{settings.mobile_logo_max_width}}px;"{%-endif-%}{{' '}}title="{{ shop.name | escape }}" alt="{{ shop.name | escape }}" />
+        {%- else -%}
+        <h1 class="logo-text">{{shop.name}}</h1>
+        {%- endif -%}
+      </a>
+    </div>
+  </div>
+  {% endcomment %}
+</div>
+
+{% schema %}
+  {
+    "name": "Mobile Nagivation",
+	"class": "header-mobile-section",
+    "settings": [
+		{
+			"type": "header",
+			"content": "General"
+		},
+		{
+            "type": "link_list",
+            "id": "linklist",
+            "label": "Choose a Linklist"
+		},
+        {
+            "type": "link_list",
+            "id": "linklist1",
+            "label": "Choose a Linklist "
+		},
+        {
+            "type": "link_list",
+            "id": "linklist2",
+            "label": "Choose a other "
+		},
+		{
+			"type": "header",
+			"content": "Styling"
+		},
+		{
+			"type": "color",
+			"id": "bg_color",
+			"label": "Background"
+		},
+		{
+			"type": "color",
+			"id": "content_color",
+			"label": "Content"
+		},
+		{
+			"type": "color",
+			"id": "border_color",
+			"label": "Border"
+		}
+		
+	]
+  }
+{% endschema %}

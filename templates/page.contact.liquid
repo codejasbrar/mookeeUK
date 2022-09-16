@@ -1,0 +1,83 @@
+<div id="content" class="col-md-12 center-column content-with-background">
+  <p class="cont_top_content">
+  We know it is a very important moment in your life so we are here if you need any help or have any questions! 								
+  </p>
+  <div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+      <div class="contect_details_sec">
+        {{page.content}}
+        {%- if settings.contact_social -%}
+            {%- assign social_icons = "twitter|facebook|google-plus|pinterest|instagram|tumblr|youtube-play|vimeo|behance|github|flickr|rss" | split: "|" | uniq -%}
+            <div class="content_follow"><span class="add_title">✓ {{settings.contact_social_title}} </span>
+      		<ul class="social-icons">
+              {%- assign social_number = social_icons.size | minus:1 -%}
+              {%- for i in (0..social_number) -%}
+              {%- assign social_name = 'social_icon_' | append:social_icons[i] -%}
+              {%- if settings[social_name] != '' -%}
+              <li><a href="{{settings[social_name]}}"><i class="fa fa-{{social_icons[i]}}"></i></a></li>
+              {%- endif -%}
+              {%- endfor -%}
+            </ul>
+            </div>
+            {%- endif -%}
+      </div>
+    </div>
+    <div class="col-md-6 col-sm-12 col-xs-12">
+      
+
+      {%- form 'contact' -%}
+      {%- if form.posted_successfully? -%}
+      <div class="success">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        {{'contact.form.post_success' | t}}
+      </div>
+      {%- endif -%}
+
+      {%- if form.errors -%}
+      <div class="warning">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        {{form.errors | default_errors}}
+      </div>
+      {%- endif -%}
+      <fieldset class="form-horizontal">
+        <div class="form-group required">
+          <label class="col-sm-12 control-label" for="name">{{'contact.form.name' | t}}</label>
+          <div class="col-sm-12">
+            <input required="required" type="text" id="name" class="form-control" value="{%- if form.name -%}{{form.name}}{%- elsif customer -%}{{customer.first_name}} {{customer.last_name}}{%- endif -%}" name="contact[name]" />
+          </div>
+        </div>
+        <div class="form-group required">
+          <label class="col-sm-12 control-label" for="email">{{'contact.form.email' | t}}</label>
+          <div class="col-sm-12">
+            <input required="required" type="email" id="email" class="form-control" value="{%- if form.email -%}{{form.email}}{%- elsif customer -%}{{customer.email}}{%- endif -%}" name="contact[email]" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-12 control-label" for="phone">Your order's number</label>
+          <div class="col-sm-12">
+            <input type="text" id="phone" class="form-control" value="{{form.phone}}" name="contact[order]" />
+          </div>
+        </div>
+        <div class="form-group required">
+          <label class="col-sm-12 control-label" for="message">{{'contact.form.message' | t}}</label>
+          <div class="col-sm-12">
+            <textarea required="required" id="message" rows="6" class="form-control" name="contact[body]">{{form.body}}</textarea>
+          </div>
+        </div>
+      </fieldset>
+      <div class="buttons">
+        <div class="pull-right">
+          <input class="btn btn-primary" type="submit" value="{{'contact.form.submit' | t}}" />
+        </div>
+      </div>
+      {%- endform -%}
+    </div>
+  </div>
+  <div class="contact_bottom">
+    <p class="one">{{settings.contact_bottom_title}}</p>
+    <div class="detaile_bottom">
+      <span> ✓ {{settings.contact_time_1}}</span>
+<span> ✓ {{settings.contact_time_2}}</span>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,211 @@
+{% capture bb_checkout_link %}{% render 'bb', type: 'bb_checkout_link' %}{% endcapture %}
+{% capture bb_total_price %}{% render 'bb', type: 'bb_total_price' %}{% endcapture %}{% assign bb_total_price = bb_total_price | plus: 0 %}
+<script class="cartFlagX"></script><div class="container">
+<div id="content" class="col-md-7 center-column content-with-background">
+  {%- if cart.items == empty -%}
+  <p>{{'cart.general.empty' | t}}</p>
+  <div class="buttons">
+    <div class="pull-right"><a href="{{shop.url}}" class="btn btn-primary">{{'cart.general.continue_shopping' | t}}</a></div>
+  </div>
+  {%- else -%}
+  <form action="{% if bb_checkout_link != blank %}{{ bb_checkout_link }}{% else %}/cart{% endif %}" method="post" data-note="{{ cart.note }}" id="cartform" enctype="multipart/form-data">
+    {% render 'bb', type: 'cart' %}
+    <div class="table-responsive cart-info">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <td class="text-center">{{'cart.general.image' | t}}</td>
+            <td class="text-center">{{'cart.general.name' | t}}</td>
+            <td class="text-center hidden-xs">{{'cart.general.quantity' | t}}</td>
+            {%comment%}<td class="text-right hidden-xs">{{'cart.general.price' | t}}</td>{%endcomment%}
+            <td class="text-right hidden-xs">{{'cart.general.total' | t}}</td>
+          </tr>
+        </thead>
+        <tbody>
+          {%- for item in cart.items -%}
+          <tr class="{% include 'mw_PO_cart', code: 'class' %} th_pb_cart_line" {% include 'mw_PO_cart' with item, code: 'style' %} data-idth="{{ item.id }}" data-indexth="{{ forloop.index }}">
+            <td class="text-center cart_img">
+              {% include 'mw_PO_cart' with item, code: 'relation' %}
+              <a href="{{item.url}}"><img src="{{item | img_url:'medium'}}" alt="{{item.title | escape}}" title="{{item.title | escape}}" class="img-thumbnail" /></a>
+            </td>
+            <td class="text-center cart_item_title">
+              <a href="{{item.url}}">
+                {{item.product.title}}
+                <span class=tdf-cart-item-t></span>                 {%- if item.product.variants.size > 1 -%}
+                <span class="variant_title"> - {{item.variant.title}}</span>
+                {%- endif -%}
+              </a>
+              
+              {% assign product_delivery = item.product.metafields.delivery_days.delivery_days | times: 1 %}
+              {% assign mattres_delivery = shop.metafields.mattress.delivery_days | times: 1 %}
+              {% if product_delivery >= mattres_delivery %}
+              <p class="variant_date">{{shop.metafields.delivery_text.shop}} {{item.product.metafields.delivery_days.delivery_days}} Days</p>
+              {% else %}
+              {% if item.properties['Mattress Type'] != blank %}
+              <p class="variant_date">{{shop.metafields.delivery_text.shop}} {{shop.metafields.mattress.delivery_days}} Days</p>
+              {% elsif item.product.title == "Mattress Type" %}
+              <p class="variant_date">{{shop.metafields.delivery_text.shop}} {{shop.metafields.mattress.delivery_days}} Days</p>
+              {% else %}
+              {% if item.variant.metafields.variant_date.variant <= "0" or item.variant.metafields.variant_date.variant == blank %}
+              <p class="variant_date">{{shop.metafields.delivery_text.shop}} {{item.product.metafields.delivery_days.delivery_days}} Days</p>
+              {% else %}
+              <p class="variant_date">{{shop.metafields.delivery_text.shop}} {{item.variant.metafields.variant_date.variant}} Days</p>
+              {% endif %}    
+              {% endif %}
+              {% endif %}
+
+              <span class="cart_item_avilable">IN STOCK</span>
+              <span class="th_bundle_discount_text"></span>
+              {%comment%}
+              {%- for p in item.properties -%}
+              {%- if p.first contains 'th_bundle_' -%}{%- continue -%}{%- endif -%}
+              {%- unless p.last == blank -%}
+              {{ p.first }}:
+              {%- if p.last contains '/uploads/' -%}
+              <a class="lightbox" href="{{ p.last }}">{{ p.last | split: '/' | last }}</a>
+              {%- else -%}
+              {{ p.last }}
+              {%- endif -%}
+              <br />
+              {%- endunless -%}
+              {%- endfor -%}
+              {%endcomment%}
+              <div class="mob_po_cart">
+                {% include 'mw_PO_cart' with item, code: 'properties' %}
+              </div>
+              <div class="cart_update_sec">
+                <button class="cart-update btooltip hide" type="submit" name="update" title="{{'cart.general.update' | t | escape}}"><i class="fa fa-refresh"></i></button>
+                <a class="cart-remove btooltip" href="/cart/change?line={{ forloop.index }}&quantity=0" title="{{'cart.general.remove' | t | escape}}">&#10005; <span class="remove_text">Remove</span></a>
+              </div>
+              <div class="mobile-cart-content row visible-xs">
+                <div class="col-xs-3">
+                  <input type="text" class="input-mobile" data-item_id="{{item.id}}" id="updates_{{item.id}}" name="updates[]" value="{{item.quantity}}" size="1" />
+                </div>
+
+                <div class="col-xs-6 mob_money">
+                  <span class="money th_item_price">{% include 'mw_PO_cart' with item, code: 'price' %}</span>
+                </div>
+
+                <div class="col-xs-3">
+                  <button class="cart-update btooltip" type="submit" name="update" title="{{'cart.general.update' | t | escape}}"><i class="fa fa-refresh"></i></button>
+                  &nbsp;
+                  <a class="cart-remove btooltip" href="/cart/change?line={{ forloop.index }}&quantity=0" title="{{'cart.general.remove' | t | escape}}"><i class="fa fa-remove"></i></a>
+                </div>
+              </div>
+            </td>
+            <td class="text-right vertical_top hidden-xs"><span class="cart_price_label">PRICE</span> <br><span class="money">{% include 'mw_PO_cart' with item, code: 'price' %}</span></td>
+            <td class="text-center vertical_top hidden-xs">
+              <span class="cart_qty_label">QUANTITY</span><br>
+              <div class="quantity__btn">
+                <input type="number" data-item_id="{{item.id}}" id="updates_{{item.id}}" name="updates[]" data-item_id="{{item.id}}" value="{{item.quantity}}" min="1" step="1" class="input-desktop">
+              </div>
+              {%- comment -%}
+              <input class="input-desktop" type="text" id="updates_{{item.id}}" name="updates[]" value="{{item.quantity}}" size="1" />
+              {%- endcomment-%}
+            </td>
+            {%- comment -%}
+            <td class="text-right hidden-xs"><span class="money">{% include 'mw_PO_cart' with item, code: 'price' %}</span></td>
+            {%- endcomment -%}
+
+          </tr>
+          {%- endfor -%}
+        </tbody>
+      </table>
+    </div>  
+    <div class="cart-total">
+      <table>
+        <tr>
+          <td class="text-left"><strong>Subtotal ({{cart.item_count}} items): Total <span class="money th_cart_total_price"><span style="display:none" class="tdf-cart-total-flag"></span>{{bb_total_price | money}}</span></strong></td>
+        </tr>
+      </table>
+    </div>
+    <input type="hidden" name="notes[Browser Name]" id="itg-browser-check">
+    <div class="buttons hide">
+      <div class="pull-left"><a href="{{shop.url}}" class="btn btn-default">{{'cart.general.continue_shopping' | t}}</a></div>
+      <div class="pull-right cart__condition__wrapper">
+        {%- if settings.cart_terms_enable -%}
+        {%- if settings.cart_terms_page != blank -%}
+        {%- assign terms_conditions_url = '/pages/' | append: settings.cart_terms_page -%}
+        {%- endif -%}
+        <div class="product-cart__condition">
+          <input type="checkbox" class="product-cart__agree" data-message="{{ 'cart.general.terms_conditions_message' | t | escape }}" />
+          <label for="product-cart__agree">{{ 'cart.general.terms_conditions_html' | t : terms_conditions_url: terms_conditions_url }}</label>
+        </div>
+        {%- endif -%}
+        <input type="submit" name="checkout" id="update-cart" class="btn btn-primary checkout-button {% if settings.cart_terms_enable %}btn-disabled{% endif %}" value="{{'cart.general.checkout' | t}}" />
+      </div>
+    </div>
+
+  </form>
+  {%- endif -%}
+</div>
+<div id="content" class="col-md-5 center-column1 checkoutright__section content-with-background">
+  <div class="cart_right">
+    <div class="discount_section hide">
+      <p class="ask_que">Do you have a discount code?</p> 
+    </div>
+    <div class="delivery_section">
+      <p class="del_info_title">Delivery Information</p>
+      <p class="del_info_content">Free delivery over £49</p>
+      <div id="tdf_discount_widget" class="tdf_content_section_discounted tdf_container tdf_nonpopup">  </div>
+    </div>
+    <p class="save_price hide">You have currently saved £99 with moKee</p>
+    <div class="panel-group" id="accordion">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title"><a href="#collapse-note" class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion">{{'cart.general.note' | t}} <i class="fa fa-caret-down"></i></a></h4>
+        </div>
+        <div id="collapse-note" class="panel-collapse collapse" style="height:auto;">
+          <div class="panel-body">
+            <div class="form-horizontal">
+              <div class="form-group">
+                <label class="col-sm-12 text-left" for="input-note">{{'cart.general.enter_note' | t}}</label>
+                <div class="col-sm-12">
+                  <textarea placeholder="{{'cart.general.enter_note' | t}}" id="input-note" rows="3" class="form-control" name="note">{{cart.note}}</textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {%- if settings.shipping_calculator == "yes" -%}
+      <div data-section-id="{{ section.id }}" data-section-type="shipping-calculator">
+        {%- include 'shipping-calculator' -%}
+      </div>
+      {%- endif -%}
+    </div>
+    <div class="go_checkout_section">
+      <span class="cart_count">Subtotal {%comment%}({{cart.item_count}} items){%endcomment%}</span>
+      <span class="money th_cart_total_price"><span style="display:none" class="tdf-cart-total-flag"></span><span class="total_count">{{bb_total_price | money}}</span></span>
+      <p class="price_vat">{{settings.vat_text}}</p>
+    </div>
+    <form class="cart checkout_form" action="{{ routes.cart_url }}" method="post" novalidate >
+      <span class="show_error hide">{{settings.alert_mess}}</span>
+      <div class="bottom_checkbox">
+        <div class="term_condition_cart"><input type="checkbox" class="term-condition_cart" required>
+          <span>{{settings.term_text}}</span>
+        </div>
+        <div class="join_newslatter">
+          <input type="hidden" name="customer[accepts_marketing]" value="false" />
+          <input type="checkbox" name="customer[accepts_marketing]" id="accepts_marketing" class="{% if form.errors contains 'email' %} error{% endif %} join-newslatter" value="true"  />
+          <span>{{settings.news_text}} </span>
+        </div>
+      </div>
+      <input type="submit" name="checkout"
+                class="btn btn-primary main_checkout_btn hide"
+                value="PROCEED TO CHECKOUT">
+      
+      <a href="JavaScript:Void(0);" class="btn btn-primary checkout_link demo_checkout_btn">PROCEED TO CHECKOUT</a>
+
+      {%- if additional_checkout_buttons -%}
+      <div id="additional-checkout-buttons">
+        <span id="additional-checkout-buttons-label">{{'cart.general.checkout_using' | t}}:</span>
+        {{content_for_additional_checkout_buttons}}
+      </div>
+      {%- endif -%}
+
+    </form>
+  </div>
+
+</div>
+</div>

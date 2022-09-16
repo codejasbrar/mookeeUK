@@ -1,0 +1,72 @@
+<div class="box home_blog blog-module box-no-advanced{%- if _lblog_mobile == false -%}{{' '}}hidden-xs hidden-sm{%- endif -%}" data-order="{{_lblog_order}}"{{' '}}{%-if section.settings.bg_color != blank-%}style="margin-top:0;"{%-endif-%}>
+  <div class="box-heading">{{_lblog_heading}}</div>
+  <div class="strip-line"></div>
+  <div class="news v2 default2 row blog-slick-slider">
+    {%- if _lblog_blog != blank-%}
+      {%- for _article in _lblog_blog.articles -%}
+      {%- if forloop.index > _lblog_limit -%}
+      {%- break -%}
+      {%- endif -%}
+      <div class="col-sm-4 col-xs-12">
+        <div class="blog_media">
+          <div class="blog_img short___img">
+            {{_article.content}}
+            
+          </div>
+          <div class="blog-body"  onclick="window.location.href = '{{_article.url}}'">
+            {%- if _article.tags.size > 0 -%}
+            <div class="tags">
+              {%- for tag in _article.tags limit:2 -%}
+              <a href="/blogs/{{_lblog_blog.handle}}/tagged/{{tag | handle}}">{{tag}}</a>
+              {%- endfor -%}
+            </div>
+            {%- endif -%}
+            <div class="blog_detail">
+             <div class="date-published">
+                <span>{{ _article.published_at | date: "%d %b %Y" }}</span>
+              </div>
+              <h2 class="blog__title"><a href="{{_article.url}}">{{_article.title}}</a></h2>
+              {%comment%}
+              <div class="blog__content hide">
+               {{_article.content | truncate: 195, "" }}
+              </div>
+              {%endcomment%}
+              <div class="blog__content short___desc"><span>
+                {{_article.content}}
+			</span></div>
+              <div class="blog_comments">
+                <span class="blog-comment"><i class="fa fa-comment" aria-hidden="true"></i><span>{{- _article.comments_count -}}</span></span>
+                <a href="{{_article.url}}" class="share_link"><i class="fa fa-share" aria-hidden="true"></i></a>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+      {%- endfor -%}
+      {%- else -%}
+      {%- for i in (1.._lblog_limit) -%}
+      <div class="col-sm-4 col-xs-12">
+        <div class="media">
+          <div class="thumb-holder">
+            <img alt="" src="{{ "noimage_265_350.png" | asset_img_url: '262x343', crop: 'top'}}" />
+          </div>
+          <div class="media-body"  onclick="window.location.href = '{{_article.url}}'">
+            <div class="tags">
+              <a href="#">{{"tag1"}}</a>
+              <a href="#">{{"tag2"}}</a>
+            </div>
+            <div class="bottom">
+              <div class="date-published">
+                <span class="blog-comment"><svg><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#global__symbols-comment"></use></svg><span>{{- i -}}</span></span>
+                <span><span class="author">Author</span> on {{ "Feb 24, 2016" | date: "%b %d, %y" }}</span>
+              </div>
+              <h5><a href="#">{{"Article Title"}}</a></h5>
+            </div>
+          </div>
+        </div>
+      </div>
+      {%- endfor -%}
+    {%- endif -%}
+  </div>
+</div>

@@ -1,0 +1,4 @@
+function loadScript(url,callback){var script=document.createElement("script")
+script.type="text/javascript";if(script.readyState){script.onreadystatechange=function(){if(script.readyState=="loaded"||script.readyState=="complete"){script.onreadystatechange=null;callback()}}}else{script.onload=function(){callback()}}
+script.src=url;document.getElementsByTagName("head")[0].appendChild(script)}
+var api_url='https://api.kmetric.io';var product_id='5e1cab3ad650cb387f5e6c99';loadScript(api_url+"/js/sdk-kogi-v1.js",function(){var kogiSdk=new KogiJsSDK();kogiSdk.sendPageView(product_id,api_url,0,0);kogiSdk.sendPageSessionTimeOut(product_id,api_url);if(Shopify.checkout&&Shopify.shop){var s_checkout=Shopify.checkout;var s_shop=Shopify.shop;kogiSdk.shopifyCompleteOrder(s_shop,s_checkout,api_url)}})

@@ -1,0 +1,30 @@
+{% render 'shogun-products', content: product %}
+{% include 'shogun-products', content: product %}
+{{product.metafields.shogun.above}}
+{%- section "product-template" -%}
+
+{{product.metafields.shogun.below}}
+
+
+{% render 'product_infox' %}
+<style>
+  .hide
+  {
+  diplay:block !important;
+  }
+  @media (min-width:320px) and (max-width:767px)
+    {
+     .size_selection .swatch-value-container {
+      width: inherit!important;
+      text-align: left!important;
+  }
+      
+  .size_selection .swatch-title {
+    max-width: unset !important;
+    width: unset!important;
+	}    
+    }
+</style> 
+
+
+

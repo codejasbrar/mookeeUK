@@ -1,0 +1,1102 @@
+<style>.mw-product-options .mw-init-spinner{width:100%;text-align:center}.mw-product-options .mw-init-spinner>div{width:18px;height:18px;background-color:#999;border-radius:100%;display:inline-block;-webkit-animation:sk-bouncedelay 1.4s infinite ease-in-out both;animation:sk-bouncedelay 1.4s infinite ease-in-out both}.mw-product-options .mw-init-spinner .bounce1{-webkit-animation-delay:-.32s;animation-delay:-.32s}.mw-product-options .mw-init-spinner .bounce2{-webkit-animation-delay:-.16s;animation-delay:-.16s}@-webkit-keyframes sk-bouncedelay{0%,100%,80%{-webkit-transform:scale(0)}40%{-webkit-transform:scale(1)}}@keyframes sk-bouncedelay{0%,100%,80%{-webkit-transform:scale(0);transform:scale(0)}40%{-webkit-transform:scale(1);transform:scale(1)}}</style>
+<style>
+ .compare-price {
+    display:none;
+  }
+  .mattress_selection .swatch-option, .color_selection .swatch-option, .drawer_selection .swatch-option,.size_selection .swatch-option,
+  .bundle_color_selection .swatch-option, .bundle_color_selection_2 .swatch-option,.bundle_color_selection_3 .swatch-option, .bundle_size_selection .swatch-option{
+    position: absolute;
+    background: #fff;
+    min-height: 465px;
+    height: auto;
+    top: 0;
+    z-index: 2;
+    width: 50%;
+    margin-bottom: 20px;
+    border-radius: 6px 0 0px 6px;
+    box-shadow: 0 2px 4px 5px rgb(0 0 0 / 10%) !important;
+    padding: 70px 1px 22px 22px;
+    transition: all 1s ease-in-out;
+    right: 0;
+    margin: 0 auto;
+  }
+  .mattress_selection .swatch-option,.color_selection .swatch-option:before, .drawer_selection .swatch-option:before, .size_selection .swatch-option:before,
+  .bundle_color_selection .swatch-option:before, .bundle_color_selection_2 .swatch-option:before, .bundle_color_selection_3 .swatch-option:before, .bundle_size_selection .swatch-option:before {
+    content: '';
+    position: absolute;
+    right: -99%;
+    width: 50%;
+    height: auto;
+    background: #fff;
+    top: 0;
+    box-shadow: 5px 2px 4px 0 rgba(0,0,0,0.1);
+    right: 0;
+  }  
+  .color_selection .swatch-option:after, .drawer_selection .swatch-option:after, .size_selection .swatch-option:after,
+  .bundle_color_selection .swatch-option:after, .bundle_color_selection_2 .swatch-option:after,.bundle_color_selection_3 .swatch-option:after, .bundle_size_selection .swatch-option:after 
+  {
+    top: 10px;
+    left: 20px;
+    color: #4a4a4a;
+    font-weight: 600;
+    font-size: 21px;
+    border-bottom: 1px solid #e6e6e6;
+    line-height: 2.3;
+    position: absolute;
+    width: calc(100% - 60px);
+  }
+  .color_selection .swatch-option:after, 
+  .bundle_color_selection .swatch-option:after, .bundle_color_selection_2 .swatch-option:after,.bundle_color_selection_3 .swatch-option:after{
+    content: "Select Colour";
+  }
+  .color_selection.felt_size .swatch-option:after {
+    content: "Select Size"!important;
+  }
+  .drawer_selection .swatch-option:after {
+    content: "Select Drawer";
+  }
+  .stand_selection .swatch-option:after {
+    content: "Add the stand";
+  }
+  .size_selection .swatch-option:after,.size_selection .mw_options_list,
+  .bundle_size_selection .swatch-option:after,.bundle_size_selection .mw_options_list{
+    content: "Select Size";
+  }
+  .size_selection.gift_amount .swatch-option:after,.size_selection.gift_amount .mw_options_list{
+    content: "Select your gift card amount";
+  }
+  .filling_selection .swatch-option:after {
+    content: "Select Filling";
+  }
+
+  .mw-product-options .swatch-image.swatch-value, .mw-product-options .swatch-color.swatch-value {
+    border-radius: 50px;
+  }
+
+  .mw-options-container .swatch-option {
+    left:200%;
+  }
+
+  .swatch-value-container.swatch-selected .swatch-value {
+    transform: none;
+    border: 3px solid #17ccc2;
+  }  
+  .mw-option .mw_product_option_label {
+    font-size: 18px;
+    background: transparent;
+    width: 100%;
+    float: unset;
+    position: relative;
+    padding: 12px 15px 0px 15px;
+    margin-bottom: 0px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: normal;
+    display: inline-block;
+  }
+  .mw-option .mw_product_option_label:after {
+    color: #fff;
+    content: "+";
+    position: absolute;
+    font-family: FontAwesome;
+    font-size: 25px;
+    top: 145px;
+    background-color: #17ccc2;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    left: 0px;
+    right: 0;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    bottom: 0;
+  }
+  .mw-options-container .mw_options_list {
+    //display: none;
+    transition: all 1s ease-in-out;
+  }  
+  .mw-options-container .mw_options_list {
+    position: absolute;
+    background: #fff;
+    min-height: 100%;
+    height: auto;
+    top: 0;
+    z-index: 2;
+    width: 80vw;
+    margin-bottom: 20px;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.1);
+    padding: 70px 0px 100px 30px;
+    left: 200%;
+  }
+  .mw-options-container .mw_options_list:after {
+    content: "Select Mattress Type";
+    top: 10px;
+    left: 30px;
+    color: #4a4a4a;
+    font-weight: 600;
+    font-size: 21px;
+    //border-bottom: 1px solid #e6e6e6;
+    line-height: 2.3;
+    position: absolute;
+    width: calc(100% - 40px);
+  } 
+  .mw-options-container .size_selection .mw_options_list:after{
+    content: "Select Size"!important;
+  }
+  .mattress_selection .option_close {
+    right: 15px;
+  }
+  .option_close {
+    position: absolute;
+    right: 40px;
+    top: 20px;
+    color: #17ccc2;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 3;
+    font-size: 17px;
+    line-height: 100%;
+  }
+  .swatch-value-container {
+    width: 104px;
+    text-align: center;
+    margin-right: 20px;
+    margin-bottom: 17px;
+  }
+  .mw-options-container label .option-label-value {
+    font-weight: 500;
+    font-size: 15px;
+    display: none;
+  }
+  .mw-option .mw_options_list:before {
+    content: '';
+    position: absolute;
+    right: -99%;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    top: 0;
+    box-shadow: 5px 2px 4px 0 rgba(0,0,0,0.1);
+  }  
+  .mw-options-container ul li {
+    width: calc(50% - 15px);
+    float: left;
+    border: 1px solid #e6e6e6;
+    padding: 20px 10px;
+    border-left: none;
+    position: relative;
+    min-height: 250px;
+    background: #fff;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.1);
+    margin-bottom: 10px;
+    margin-right: 10px;
+  }
+  .no_sel_sec, .no_thanks_sec {
+    position: absolute;
+    width: 100%;
+    float: left;
+    text-align: center;
+    margin-top: 20px;
+    text-transform: uppercase;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+  }
+  .no_selection, .no_thanks_btn {
+    border-radius: 26px;
+    padding: 14px 26px;
+    font-size: 15px;
+    font-weight: 600;
+    top: 0;
+    background: #4a4a4a;
+  }
+
+  .mw-options-container ul li .beside-image {
+    position: absolute;
+    left: 10px;
+    top: 20px;
+    border-radius: 50%;
+    width: 154px!important;
+    height: 154px!important;
+  }
+  .mw-options-container ul li span.option-value-label {
+    padding-left: 170px;
+    font-size: 16px;
+    font-weight: 600;
+    float: left;
+    margin-bottom: 0;
+    width: calc(100% - 75px);
+  }
+  .mw-options-container ul li .mw-option-description {
+    padding-left: 170px;
+    font-size: 15px;
+    margin-top: 20px;
+    padding-bottom: 50px;
+    float: left;
+    min-height: 151px;
+  }
+  .mw_options_list span.value-price {
+    position: absolute;
+    top: 20px;
+    color: #17ccc2;
+    right: 20px;
+    font-weight: 600;
+    font-size: 19px;
+  }  
+  .mw-option-description p {
+    margin-bottom: 0;
+  }
+  .mattress_selection ul li input{
+    display: none;
+  }
+  .mw-options-container ul li.active_var .beside-image {
+    border: 3px solid #17ccc2!important;
+  }  
+  .mw-options-container ul li .beside-image {
+    border: 3px solid transparent!important;
+    cursor: pointer;
+  }   
+  .product_wrapper.itg-single-product-detail.active_mattress{
+    //min-height: 850px;
+  } 
+  .mattress_sel {
+    position: absolute;
+    bottom: 9px;
+    left: 32%;
+    right: auto;
+    margin: 0 auto;
+    display: table;
+  }
+  a.btn.select_btn {
+    border-radius: 26px;
+    padding: 6px 52px;
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .size_selection .mw-option .mw_product_option_label:before,
+  .bundle_size_selection .mw-option .mw_product_option_label:before{
+    content: "Select ";
+  }
+  .mw-options-container .mw-option .mw_product_option_label:before {
+    content: " ";
+    position: absolute;
+    height: 290px;
+    top: 0px;
+    width: 100%;
+    background: #fff;
+    opacity: 0.8;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0px;
+    border-radius: 15px;
+    left: 0;
+  }
+  .mw-options-container .mw-option .removed_opacity.mw_product_option_label:before,.mw-options-container .mw-option .removed_opacity.mw_product_option_label:after{
+    display:none;
+  }
+  .stand_selection .mw_product_option_label:before {
+    content: "" !important;
+  }
+  .mw-option .mw_product_option_label.content_hide:before{
+    content: none;
+  }
+
+  /* .drawer_selection img.once-image {
+  display: none!important;
+  } */
+  .drawer_selection span.value-price {
+    display: none;
+  } 
+
+  .woolnesproduct .no_sel_sec {
+    display: none;
+  }
+  .stand_selection .no_thanks_sec {
+    display: none;
+  }
+  .stand_selection .no_thanks_sec.stand_hide_btn {
+    display:block;
+  }
+  .mw-option-description p {
+    font-size: 13px;
+  }
+  .special_note {
+    position: absolute;
+    width: 100%;
+    float: left;
+    text-align: left;
+    margin-top: 20px;
+    text-transform: initial;
+    top: 40px;
+    font-style: italic;
+    background: #fff;
+  }
+  .mw-options-container .woolnesproduct .mw_options_list {
+    padding: 100px 0px 40px 30px;
+  }
+  label.mw_product_option_label.its_open {
+    display: none;
+  }
+  .classic_wicker_moses_basket_mattress.mattress_selection .mw_options_list.active_mattress_selection {
+    padding-top: 100px;
+  }
+
+
+  .mw-options-container .size_selection .mw_options_list,
+  .mw-options-container .bundle_size_selection .mw_options_list{
+    box-shadow: none;
+    width: 119%;
+    min-height:300px;
+  }
+
+  .mw-options-container .size_selection .mw_options_list li,
+  .mw-options-container .bundle_size_selection .mw_options_list li{
+    width: 100%;
+    box-shadow: none;
+    height: auto;
+    border: none;
+    min-height: 16px;
+    padding: 0 15px;
+    text-align: left;
+  }
+
+  .mw-options-container .size_selection .mw_options_list li input[type="radio"],
+  .mw-options-container .bundle_size_selection .mw_options_list li input[type="radio"]{
+    float: left;
+    margin-top: 7px;
+  }
+
+  .mw-options-container .size_selection .mw_options_list li span.option-value-label,
+  .mw-options-container .bundle_size_selection .mw_options_list li span.option-value-label{
+    padding-left: 3px;
+  } 
+  .size_selection .no_sel_sec,
+  .bundle_size_selection .no_sel_sec{
+    display: none;
+  }
+
+  .size_selection .swatch-value, .size_selection.gift_amount .swatch-value, .filling_selection .swatch-value,
+  .bundle_size_selection .swatch-value{
+/*     width: 20px!important;
+    height: 20px!important;
+    display: inline;
+    margin-right: 5px!important;
+    float: left; */
+  }
+
+  .size_selection .swatch-title, .size_selection.gift_amount .swatch-title,.filling_selection .swatch-title,
+  .bundle_size_selection .swatch-title{
+/*     display: inline; */
+  }
+  .swatch-value-container {
+    position: relative;
+  }
+  .swatch-title {
+    pointer-events: none;
+    position: absolute;
+    margin-top: 0!important;
+  }
+  .color_selection .swatch-title, .drawer_selection .swatch-title,
+  .bundle_color_selection .swatch-title,.bundle_color_selection_2 .swatch-title, .bundle_color_selection_3 .swatch-title{
+    left: 0;
+    width: auto;
+    right: 0;
+    margin-left: -5px;
+  }
+/*   .size_selection .swatch-title,
+  .bundle_size_selection .swatch-title{
+    max-width: 444px;
+    width: 170px;
+  } */
+  .filling_selection .swatch-title {
+    margin-left: 26px !important;
+    min-width: 100px;
+    text-align: left;
+  }
+  .color_selection .swatch-value-container, .drawer_selection .swatch-value-container,
+  .bundle_color_selection .swatch-value-container, .bundle_color_selection_2 .swatch-value-container, .bundle_color_selection_3 .swatch-value-container{
+    margin-bottom: 40px;
+  }
+  .size_selection .swatch-value-container, .filling_selection .swatch-value-container,
+  .bundle_size_selection .swatch-value-container{
+/*     width: auto!important;    
+    margin-right: calc(100% - 250px);
+    text-align: left; */
+  }
+  .swatch-option.active_size_selection,
+  .swatch-option.active_bundle_size_selection  {
+/*     height: auto; */
+/*     min-height: auto; */
+  }
+
+
+  .schplendid-midi-cot .mw-option-swatch.mw-option.drawer_selection {
+    display: none!important;
+  }
+  .cart a.edit-options {
+    display: none;
+  }
+
+  .the-spacesaver-collection.product .add_to_cart {
+    //display: block!important;
+  }
+
+
+  .swatch-title span.value-price {
+    display: none;
+  }  
+  .bundle_drawer .no_thanks_sec, .bundle_mattress .no_sel_sec, .bundle_mattress .option-value-label span.value-price, .bundle_stand .no_thanks_sec {
+    display: none!important;
+  } 
+  .mattress_selection ul li input {
+    display:block!important;
+    opacity: 0;
+  }
+  .mw_product_option_label .option-label-value span.value-price {
+    display: none;
+  }
+  /*   12-5-2021 */
+  .mw-options-container {
+    display: grid;
+    grid-template-columns: repeat(3, 32%);
+    justify-content: center;
+    gap: 20px;
+  }
+  .mw-options-container .mw-option.drawer_selection {
+    margin-top: 0px;
+  }
+  /*   .mattress_selection label.mw_product_option_label {
+  float: right;
+  } */
+  /*  .once-image {
+  min-width: 200px;
+  max-width: 300px;
+  max-height: 260px;
+  width: auto;
+  height: auto;
+  }*/
+  .once-image {
+    min-width: auto;
+    max-width: 300px;
+    max-height: 260px;
+    width: auto;
+    height: auto;
+    padding: 0 25px;
+  }
+  .mw-options-container .mw-option {
+    padding-bottom: 10px;
+    border: 2px solid #e6e6e6;
+    max-height: 296px;
+    text-align: center;
+    border-radius: 15px;
+    width: auto;
+  }
+  .no_sel_sec.border-red {
+    left: 0;
+    right: 0;
+  }
+  @media(min-width:901px) and (max-width:1200px){
+    .mw-options-container {
+      grid-template-columns: repeat(2, auto);
+    }  
+  }  
+  @media(min-width:768px) and (max-width:1200px){
+
+    .color_selection .swatch-option, .bundle_color_selection .swatch-option{
+      min-height: 550px;
+    }
+    .color_selection .swatch-value-container {
+      width: 90px;
+    }
+    .product .color_selection .no_thanks_sec {
+      margin-top: 0 !important;
+      bottom: 15px;
+    }
+  }  
+  @media(max-width:900px){
+    .once-image {
+      min-width: 130px;
+      max-width: 300px;
+      max-height: 120px;
+      width: auto;
+      height: auto;
+      padding: 0px;
+    }
+    .mw-options-container {
+      grid-template-columns: repeat(2, auto);
+    }
+    .mw-options-container .mw-option .mw_product_option_label:before {
+      height: 178px;
+    }
+    .mw-option .mw_product_option_label:after{
+      top: 80px;
+    }
+  }  
+  @media(max-width:500px){
+    .mw-options-container .mw-option {
+      max-height: 190px;
+    }
+    .mw-option .mw_product_option_label {
+      font-size: 15px;
+      padding: 12px 10px 0px 10px;
+    }
+    .mw-options-container .mw-option .mw_product_option_label:before {
+      height: 190px;
+      top: 0px;
+    }
+    .mw-option .mw_product_option_label:after {
+      top: 75px;
+    }
+    .once-image {
+      min-width: auto;
+      max-height: 110px;
+    }
+    .mw-product-options .mattress_selection .swatch-option,.mw-product-options .color_selection .swatch-option,.mw-product-options .drawer_selection .swatch-option,.mw-product-options .size_selection .swatch-option,.mw-product-options .bundle_color_selection .swatch-option,.mw-product-options .bundle_color_selection_2 .swatch-option,.mw-product-options .bundle_color_selection_3 .swatch-option,.mw-product-options .bundle_size_selection .swatch-option{
+      width:300px !important;
+      position: absolute !important;
+      height: 200px;
+      overflow: scroll;
+    }
+    .swatch-value-container {
+      width: auto;
+      margin-bottom: 80px;
+    }
+    .product .no_sel_sec, .product .no_thanks_sec {
+      bottom: unset !important;
+      position: absolute !important;
+      margin-top: 80px !important;
+    }
+    .product .swatch-option .no_thanks_btn {
+      position: absolute !important;
+      top: unset !important;
+      left: 0 !important;
+      margin-left: unset !important;
+      right: 0;
+      width: 90%;
+      margin: 0 auto !important;
+      bottom: 15px !important;
+    }
+  }
+
+</style>
+<script type="text/javascript">
+  window.mwProductOptionsObjects = {
+    product: {{ product | json }},
+    cart: {{ cart | json }},
+    template_name: {{ template.name | json }},
+    shop: {
+    domain: {{ shop.permanent_domain | json }},
+    money_format : {{ shop.money_format  | json }},
+    money_with_currency_format : {{ shop.money_with_currency_format  | json }}
+  }
+  };
+
+  {% if product %}
+  {% for variant in product.variants %}
+  window.mwProductOptionsObjects.product.variants[{{ forloop.index | minus: 1}}].inventory_quantity = {{ variant.inventory_quantity | default: 0 }};
+  window.mwProductOptionsObjects.product.variants[{{ forloop.index | minus: 1}}].inventory_management = {{ variant.inventory_management | json }};
+  window.mwProductOptionsObjects.product.variants[{{ forloop.index | minus: 1}}].inventory_policy = {{ variant.inventory_policy | json }};
+  {% endfor %}
+  {% endif %}
+
+  function mwShowInitSpinner() {
+    var opt = document.getElementsByClassName('mw-product-options');
+    if (opt.length > 0) {
+      var timeSpinner = 6000;
+      opt[0].innerHTML = '<div id="mw-apo-init-spinner" class="mw-init-spinner"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div>';
+      setTimeout(function(){ document.getElementById('mw-apo-init-spinner') && document.getElementById('mw-apo-init-spinner').remove(); }, timeSpinner);
+    }
+  }
+  mwShowInitSpinner();
+
+  $(document).ready(function() {
+    $("body").on("mw_apo", function(event, action) {
+      if (action === "end-initialize") {
+        function custom() {
+          var options = mwProductOptions.Module.config.options;
+          //             $('.mw_product_option_label').html("");
+
+          for (var option in options) {
+
+            var values = options[option].values;
+
+            for (var value in values) {
+              var val = values[value];
+
+              if (typeof val.sku !== "undefined") {
+                var $optDr = $(
+                  '.mw-option-select option[data-value-id="' + val.id + '"]'
+                );
+                var optionHtml = $optDr.html();
+                var optionValue = $optDr.val();
+
+                $optDr
+                .val(optionValue + " (SKU: " + val.sku + ")")
+                .trigger("change");
+
+                var $opt = $('option[data-value-id="' + val.id + '"]'),
+                    $select = $opt.parent();
+
+                $opt.attr("data-sku", val.sku);
+
+                var $optRadio = $('input[data-value-id="' + val.id + '"]');
+                var optionHtml = $optRadio.html();
+                var optionValue = $optRadio.val();
+                $optRadio
+                .val(optionValue)
+                .trigger("change");
+                $optRadio.html(optionHtml + " (SKU: " + val.sku + ")");
+                $optRadio.attr("data-sku", val.sku);
+              }
+            }
+
+          }
+
+          //   $('.mw_product_option_label').text("");
+
+          $('.mw-option select[class$="-select"]').on("change", function() {
+            var sku = $(this)
+            .children("option:selected")
+            .attr("data-sku"),
+                $input = $(this)
+            .parents(".mw-option:first")
+            .find("input[name^=properties]"),
+                value = $input.val();
+
+            if (sku) $input.val(value).trigger("change");
+          });
+        }
+      } else {
+
+        return;
+      }
+
+      custom();
+      var total_bundle = $(".mw-option-swatch").length;
+      $(".quantity__btn strong").text(total_bundle);
+      $(".mw-option-swatch").each(function(){
+        var value_container = $(this).find(".swatch-value-container");
+        var val = $(this).find('input').attr('value'); 
+        //         var remove_class = $(this).removeClass('mw-validate-required-option');
+        var all_class = $(this).attr('class');
+        var all_class = all_class.replace("mw-validate-required-option","");
+        var option_label_attr_for = $(this).find('.mw_product_option_label').attr('for'); 
+        var product_name = $(this).find('input').attr('name'); 
+        var product_name = product_name.replace(']','').split("[")[1];
+        var lastClass = all_class.substr( all_class.lastIndexOf(' ') + 1);
+        var classses = $('.selected_product_name .'+lastClass).length;
+
+        if(product_name =="Mattress Type"){
+          var change_text = "Change Type";
+        }else{
+          var change_text = "Change Color";
+        }
+        $('.selected_product_name').append('<div class="'+all_class+'" data-name_option="'+product_name+'">'+product_name+' '+val+' added to your collection <span><label class="mw_product_option_label" for="'+option_label_attr_for+'">'+change_text+'</label></span></div>');      
+      });
+      
+      var regular_price = 0,compare_price = 0;
+      $(".swatch-value-container.swatch-selected").each(function(){
+        if(parseInt($(this).data('value-price')) !='NaN'){
+          regular_price += parseFloat($(this).data('value-price'));
+          compare_price += parseFloat($(this).data('value-compare-price'));
+        }
+      });
+      var mini_cot = $('.Product-reg_Price').find('span').attr('orig-price');
+      //       var mini_cot = mini_cot.replace(/\D/g,'');
+      compare_price = parseFloat(compare_price) + mini_cot;
+      regular_price = parseFloat(regular_price) + mini_cot;
+      var discount = compare_price - regular_price; 
+      var discount = parseFloat(discount/1000).toFixed(2);
+      $('.save_price').find('strong').text('£'+discount);
+      $('.mw-options-container label .option-label-value').html("");
+      
+    });
+
+    $( document ).ajaxComplete(function() {
+      var total_price = $('.Product-reg_Price .money').text();
+      $('.cart-item-total-price .money').text(total_price);
+    });    
+
+  });
+
+  $(document).on("click",".selected_product_name .mw_product_option_label",function() {
+    $('html, body').animate({ 
+      scrollTop: $("#product-form").offset().top
+    }, 1000);
+  });
+
+      $(document).on("click",".mw_product_option_label",function() {
+    $('<div class="option_close">&#x2573;</div>').prependTo('.swatch-option, .mw_options_list');
+    $("<div class='no_sel_sec'><div class='no_selection btn'>I Don't Want A Mattress</div></div>").appendTo('.mw_options_list');
+    $('<div class="mattress_sel"><a href="javascript:void(0);" class="btn select_btn">Select</a></div>').appendTo('.mattress_selection ul li');
+  });
+
+  $(document).on("click",".woolnesproduct .mw_product_option_label",function() {
+    $(".woolnest_note").prependTo('.mw_options_list');
+    $(".woolnest_note").show();
+  });
+
+  $(document).on("click",".classic_wicker_moses_basket_mattress .mw_product_option_label",function() {
+    $("aelovera_note").prependTo('.mw_options_list');
+    $(".aelovera_note").show();
+  });
+
+
+  $(document).on("click",".color_selection .mw_product_option_label",function() {
+    $('.color_selection .swatch-option').css('left','0').addClass('active_color_selection');
+    $('.product-info .cart .add_to_cart').hide();
+  });
+
+  function itgLoopForever() {
+    var $value = $(document).find('.color_selection select.swatch-select').val();
+    //console.log($value);
+    $(document).find('.single-option-selector').each(function(){
+      var select = $(this);
+      if( select.val() == $value ){
+
+      }else{     	
+        select.find('option').each(function(){
+          if( $(this).val() == $value ){
+            select.val($value).change();
+          }
+        });           	
+        $(".custom_product_slider").each(function(){
+          $(this).find("[data-slider='" + $value + "']").addClass('active_slider').siblings().removeClass('active_slider');
+        });
+      }
+    });
+  }	
+
+  var interval = self.setInterval(function(){itgLoopForever()},300);
+
+  /*  == Added Selected list and change save price == */
+  $(document).on("click",".swatch-value-container",function() {
+    var regular_price = 0,compare_price = 0;
+    $(".swatch-value-container.swatch-selected").each(function(){
+      if(parseFloat($(this).data('value-price')) !='NaN'){
+        regular_price += parseFloat($(this).data('value-price'));
+        compare_price += parseFloat($(this).data('value-compare-price'));
+      }      
+    });
+    var mini_cot = $('.Product-reg_Price').find('span').attr('orig-price');
+    //       var mini_cot = mini_cot.replace(/\D/g,'');
+    compare_price = parseFloat(compare_price) + mini_cot;
+    regular_price = parseFloat(regular_price) + mini_cot;
+    var discount = compare_price - regular_price; 
+    var discount = parseFloat(discount/1000).toFixed(2);
+    
+    $('.save_price').find('strong').text('£'+discount);
+    var option_val_add = $(this).data('color');
+    var option_value = $(this).parents('.mw-option-swatch').find('input').val(); 
+    if(option_value !=""){
+      $(this).parents('.mw-option-swatch').find('.option_close').show();
+      $(this).parents('.mw-option-swatch').find('.no_sel_sec.border-red').hide();
+      $(this).parents('.mw-option-swatch').find('.accept_button').show();
+    }else{
+      $(this).parents('.mw-option-swatch').find('.option_close').hide();
+      $(this).parents('.mw-option-swatch').find('.swatch-option').append(("<div class='no_sel_sec border-red'>please select one option mandatory</div>"));
+      $(this).parents('.mw-option-swatch').find('.accept_button').hide();
+      exit();
+    }
+    var val = $(this).data('value-text'); 
+    //     var remove_class = $(this).parents('.mw-option-swatch').removeClass('mw-validate-required-option');
+    var all_class = $(this).parents('.mw-option-swatch').attr('class');
+    var all_class = all_class.replace("mw-validate-required-option","");
+    var option_label_attr_for = $(this).parents('.mw-option-swatch').find('.mw_product_option_label').attr('for'); 
+    var product_name = $(this).parents('.mw-option-swatch').find('input').attr('name'); 
+    var product_name = product_name.replace(']','').split("[")[1]
+    var lastClass = all_class.substr( all_class.lastIndexOf(' ') + 1);
+    var classses = $('.selected_product_name .'+lastClass).length; 
+
+    $(this).parents('.mw-option-swatch').find('.mw_product_option_label').addClass("removed_opacity");
+    if(product_name =="Mattress Type"){
+      var change_text = "Change Type";
+    }else{
+      var change_text = "Change Color";
+    }
+    if($('.selected_product_name .'+lastClass).length > 0){
+      $('.selected_product_name .'+lastClass).html(product_name+' '+val+' added to your collection <span><label class="mw_product_option_label" for="'+option_label_attr_for+'">'+change_text+'</label></span>');
+    }else{
+      $('.selected_product_name').append('<div class="'+all_class+'" data-name_option="'+product_name+'">'+product_name+' '+val+' added to your collection <span><label class="mw_product_option_label" for="'+option_label_attr_for+'">'+change_text+'</label></span></div>');      
+    }
+  });  
+  /*  == End Added Selected list == */
+
+  $(document).on("click",".drawer_selection .swatch-value-container .swatch-image",function() {    
+    var temp_image = $(this).css('background-image');    
+    var permanet_img = $(".prod_img_slider.active_slider .lslide.active .main_pro_img").attr('src');	
+    $(".prod_img_slider.active_slider .lslide.active .main_pro_img").css({"background-image": temp_image, "background-size": "contain", "background-repeat": "no-repeat", "background-position": "center"}).attr('src','https://cdn.shopify.com/s/files/1/0255/4029/6738/files/m06.png');
+    $(".prod_img_slider.active_slider .lslide.active .main_pro_img").next().css({"background-image": temp_image, "background-size": "contain", "background-repeat": "no-repeat", "background-position": "center"}).attr('src','https://cdn.shopify.com/s/files/1/0255/4029/6738/files/m06.png');
+    $('.image_popup img.img_new').css({"background-image": temp_image, "background-size": "contain", "background-repeat": "no-repeat", "background-position": "center"}).attr('src','https://cdn.shopify.com/s/files/1/0255/4029/6738/files/m06.png');
+    setTimeout(function() {
+      //       $('.img_close_btn').click();
+      $(".prod_img_slider.active_slider .lslide.active .main_pro_img").css({"background-image": 'none'}).attr('src',permanet_img);
+      $('.image_popup img.img_new').css({"background-image": "none", "background-size": "contain", "background-repeat": "no-repeat", "background-position": "center"}).attr('src',permanet_img);
+
+    }, 15000);
+  }); 
+
+  $(document).on("click",".drawer_selection .mw_product_option_label",function() {
+    $('.drawer_selection .swatch-option').css('left','0').addClass('active_drawer_selection');
+    $('.product-info .cart .add_to_cart').hide();
+    $(this).addClass('its_open');
+  });
+
+  $(document).on("click",".size_selection .mw_product_option_label",function() {
+    $('.size_selection .swatch-option').css('left','0').addClass('active_size_selection');
+    /*$('.product-info .cart .add_to_cart').fadeOut();*/
+    $(this).addClass('its_open');
+  });
+
+  $(document).on("click",".filling_selection .mw_product_option_label",function() {
+    $('.filling_selection .swatch-option').css('left','0').addClass('active_size_selection');
+    /*$('.product-info .cart .add_to_cart').fadeOut();*/
+    $(this).addClass('its_open');
+  });  
+
+  $(document).on("click",".mattress_selection .mw_product_option_label",function() {
+    $('body').addClass('active_mattress_on');
+    $('<span class="option-label-value"></span>').appendTo(this);
+    //     $(this).parents('.mattress_selection').find('.swatch-option').css('left','0').addClass('active_mattress_selection');
+    $('.mattress_selection .swatch-option').css('left','0').addClass('active_mattress_selection');
+    //     $('.mattress_selection .mw_options_list').css('left','-51vw').addClass('active_mattress_selection');
+    //     var popupHeight = $('.mattress_selection .mw_options_list').outerHeight();
+    var popupHeight = $('.mattress_selection .swatch-option').outerHeight();
+    var mq = window.matchMedia( "(min-width: 767px)" );
+    if (mq.matches) {
+      $('.product-info .cart .add_to_cart').hide();
+      $('#product-images-content-product-template').css('opacity','0');
+    }
+    var total_height = 'calc('+ popupHeight +'px + ' + '50px)';
+    $('.product_wrapper.itg-single-product-detail').addClass('active_mattress');
+    $('.product_wrapper.itg-single-product-detail.active_mattress').css('height','auto');    
+  });
+
+
+  $(document).on("click",".option_close,.accept_button,.mattress_selection ul li",function() {
+    $('.mw_options_list, .swatch-option').css('left','200%').removeClass('active_mattress_selection').removeClass('active_color_selection').removeClass('active_drawer_selection').removeClass('active_size_selection');
+    $('.product-info .cart .add_to_cart').show();
+    $('#product-images-content-product-template').css('opacity','1');
+    $('.product_wrapper.itg-single-product-detail').removeClass('active_mattress');
+    $('.product_wrapper.itg-single-product-detail').css('height','auto');
+    $('body').removeClass('active_mattress_on');
+    $('.mw_product_option_label').removeClass('its_open');
+  });
+
+  $(document).on("click",".color_selection .swatch-value-container .swatch-option",function() {
+    $('.color_selection .mw_product_option_label').addClass('content_hide');
+    var prod_img_height = $(".custom_product_slider .prod_img_slider.active_slider").outerHeight();
+    $(".product .custom_product_slider").css('height',prod_img_height);
+  });
+
+  $(document).on("click",".drawer_selection .swatch-value-container .swatch-option",function() {
+    $('.drawer_selection .mw_product_option_label').addClass('content_hide');
+    $('.mw_product_option_label').removeClass('its_open');
+  });
+
+  $(document).on("click",".size_selection .swatch-value-container .swatch-option",function() {
+    $('.size_selection .mw_product_option_label').addClass('content_hide');
+    $('.mw_product_option_label').removeClass('its_open');
+  });
+
+  $(document).on("click",".mattress_selection ul li",function() {
+    $('.mattress_selection .mw_product_option_label').addClass('content_hide');
+  });
+
+  $(document).on("click",".no_selection",function() {
+    $('.mattress_selection .mw_product_option_label').removeClass('content_hide');
+    $('body').removeClass('active_mattress_on'); 
+  });
+
+  $(document).on("click",".no_selection",function() {
+    //$('.mattress_selection .mw_options_list li input:checkbox').removeAttr('checked');
+    $('.mw_options_list').css('left','200%').removeClass('active_mattress_selection');
+    $('.product-info .cart .add_to_cart').show();
+    $('.product_delivery').show();
+    $('.deliver_mattress').hide();
+    $('#product-images-content-product-template').css('opacity','1');
+    $('.mattress_selection ul li').removeClass('active_var');
+    $('.product_wrapper.itg-single-product-detail').removeClass('active_mattress');
+    $(".mattress_selection .mw_product_option_label .option-label-value").remove();
+    $(".mattress_selection .mw_product_option_label").css('display','inline-block');
+  });  
+
+  $(document).on("click",".mattress_selection ul li",function() { 
+    $('.variant_change_date').removeClass('color_show');
+    $('.variant_change_date').hide();
+    $('.deliver_mattress').show();
+    $('.deliver_mattress').html($(this).find('input[type=radio]').data('metafields'));
+    $(this).addClass('active_var').siblings().removeClass('active_var');
+    $(this).find('input[type=checkbox]').prop('checked',true).change().click().attr("checked", "checked");
+    $(this).siblings().find('input[type=checkbox]').prop('checked',false);	
+    $(".mattress_selection ul li input[type=checkbox]:checked").each( function() {
+      $(".mattress_selection .mw_product_option_label .option-label-value:first-child").text(" - " + this.value);
+    });
+    $(this).find('input[type=radio]').prop('checked',true).change().click().attr("checked", "checked");
+    $(this).siblings().find('input[type=radio]').prop('checked',false);	
+    $(".mattress_selection ul li input[type=radio]:checked").each( function() {
+      $(".mattress_selection .mw_product_option_label .option-label-value:first-child").text(" - " + this.value);
+    });
+  });  
+
+  $(document).on("click",".color_selection .swatch-value-container",function() {
+    var color_value = $(this).data('value-text');
+    var $ddlHeader_1 = $("select.color_option_dropdown");
+    var $ddlHeader_2 = $("select.colour_option_dropdown");
+    $ddlHeader_1.val(color_value).prop('selected', true).change(); 
+    $ddlHeader_2.val(color_value).prop('selected', true).change();     
+  });
+
+  $(document).on("click",".size_selection .swatch-value-container",function() {
+    var size_value = $(this).data('value-text');
+    var $ddlHeader2 = $("select.size_option_dropdown");
+    $ddlHeader2.val(size_value).prop('selected', true).change();    
+  });
+
+  $(document).on("click",".filling_selection .swatch-value-container",function() {
+    var fill_value = $(this).data('value-text');
+    var $ddlHeader3 = $("select.filling_option_dropdown");
+    $ddlHeader3.val(fill_value).prop('selected', true).change();     
+  });
+  $(document).on("click",".mw_product_option_label",function() {
+    $(this).parents('.mw-option-swatch').find('.swatch-option').append(("<div class='accept_button no_thanks_sec'><div class='no_thanks_btn btn'>Accept</div></div>"));
+  });
+  //   $(document).on("click",".drawer_selection .mw_product_option_label",function() {
+  //     $("<div class='no_thanks_sec'><div class='no_thanks_btn btn'>I don't need a draw</div></div>").appendTo('.drawer_selection .swatch-option');
+  //   });
+
+  $(document).on("click",".stand_selection .mw_product_option_label",function() {
+    $("<div class='no_thanks_sec stand_hide_btn'><div class='no_thanks_btn btn'>No, thanks</div></div>").appendTo('.stand_selection .swatch-option');
+  });  
+
+  $(document).on("click",".no_sel_sec",function() {
+    $('.mattress_selection ul li input[type="checkbox"]').each(function() {
+      this.checked = false;
+      $(this).change();
+    });
+    $('.mattress_selection ul li input[type="radio"]').each(function() {
+      this.checked = false;
+      $(this).change();
+    });
+  });
+
+  $(document).on("click",".no_thanks_btn",function() {
+    $('.stand_selection .mw_product_option_label').removeClass('content_hide');
+    $('.drawer_selection .mw_product_option_label').removeClass('content_hide');
+    $('.stand_selection .swatch-option').css('left','200%').removeClass('active_stand_selection');
+    $('.drawer_selection .swatch-option').css('left','200%').removeClass('active_drawer_selection');
+    $('.product-info .cart .add_to_cart').show();
+    $('body').removeClass('active_mattress_on');
+    //     $(".drawer_selection .swatch-select").each(function() {
+    //       $(this).find('option:eq(0)').prop('selected', true).change();
+    //     });
+    //     $(".stand_selection .swatch-select").each(function() {
+    //       $(this).find('option:eq(0)').prop('selected', true).change();
+    //     });
+  });
+
+
+  $(document).on("click",".mattress_sel",function() {
+    var kk = $(this).parent().find('input[type="checkbox"]').click();
+  });
+
+  $(document).ready(function(){
+    var currunt_var = $('.custom_color_option .option-select-value').text();
+    $(".color_selection .swatch-option").each(function(){
+      $(this).find("[data-value-text='" + currunt_var + "']").addClass('active_slider').siblings().removeClass('active_slider');
+    });      
+  });  
+
+  /* Bundle ===================== */
+  $(document).on("click",".bundle_color_selection .mw_product_option_label",function() {
+    $('.bundle_color_selection .swatch-option').css('left','0').addClass('active_bundle_color_selection');
+    //$('.product-info .cart .add_to_cart').hide();
+  });  
+
+  $(document).on("click",".bundle_color_selection .swatch-value-container",function() {
+    var val = $(this).data('value-text');
+    $(".swatch-element").each(function(){
+      $(this).find("[data-value='" + val + "']").click();
+    });     
+  });
+
+  $(document).on("click",".bundle_color_selection_2 .mw_product_option_label",function() {
+    $('.bundle_color_selection_2 .swatch-option').css('left','0').addClass('active_bundle_color_selection_2');
+    //$('.product-info .cart .add_to_cart').hide();
+  });  
+
+  $(document).on("click",".bundle_color_selection_2 .swatch-value-container",function() {
+    var val = $(this).data('value-text');
+    $(".swatch-element").each(function(){
+      $(this).find("[data-value='" + val + "']").click();
+    });    
+  });
+
+  $(document).on("click",".bundle_color_selection_3 .mw_product_option_label",function() {
+    $('.bundle_color_selection_3 .swatch-option').css('left','0').addClass('active_bundle_color_selection_3');
+    //$('.product-info .cart .add_to_cart').hide();
+  });  
+
+  $(document).on("click",".bundle_color_selection_3 .swatch-value-container",function() {
+    var val = $(this).data('value-text');
+    $(".swatch-element").each(function(){
+      $(this).find("[data-value='" + val + "']").click();
+    });     
+  });
+
+  $(document).on("click",".bundle_color_selection .swatch-value-container",function() {
+    var val = $(this).data('value-text');
+    $(".custom_product_slider").each(function(){
+      $(this).find("[data-slider='" + val + "']").addClass('active_slider').siblings().removeClass('active_slider');
+    });    
+  });
+
+  $(document).on("click",".bundle_color_selection .swatch-value-container .swatch-option",function() {
+    //$('.bundle_color_selection .mw_product_option_label').addClass('content_hide');
+    var prod_img_height = $(".custom_product_slider .prod_img_slider.active_slider").outerHeight();
+    $(".product .custom_product_slider").css('height',prod_img_height);
+  });  
+  $(document).on("click",".bundle_color_selection .swatch-value-container",function() {
+    var color_value = $(this).data('value-text');
+    var $ddlHeader_1 = $("select.color_option_dropdown");
+    var $ddlHeader_2 = $("select.colour_option_dropdown");
+    $ddlHeader_1.val(color_value).prop('selected', true).change(); 
+    $ddlHeader_2.val(color_value).prop('selected', true).change();
+  });    
+  $(document).on("click",".bundle_size_selection .mw_product_option_label",function() {
+    $('.bundle_size_selection .swatch-option').css('left','0').addClass('active_bundle_size_selection');
+    /*$('.product-info .cart .add_to_cart').fadeOut();*/
+    $(this).addClass('its_open');
+  });
+  $(document).on("click",".bundle_size_selection .swatch-value-container .swatch-option",function() {
+    //$('.bundle_size_selection .mw_product_option_label').addClass('content_hide');
+    $('.mw_product_option_label').removeClass('its_open');
+  });
+  $(document).on("click",".bundle_size_selection .swatch-value-container",function() {
+    var size_value = $(this).data('value-text');
+    var $ddlHeader2 = $("select.size_option_dropdown");
+    $ddlHeader2.val(size_value).prop('selected', true).change();     
+  });  
+  $(document).on("click",".mw_product_option_label",function() {
+    $(".swatch-value-container").each(function(){
+      var data_att = $(this).attr("data-value-text").trim();
+      $(this).attr('data-color', data_att);
+    });    
+  });
+
+
+
+</script>
+<div class='special_note woolnest_note' style="display:none;">
+  {{settings.woolnest_note}}
+</div>
+<div class='special_note aelovera_note' style="display:none;">
+  {{settings.aelovera_note}}
+</div>

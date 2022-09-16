@@ -1,0 +1,186 @@
+<style>
+  #latest_blog-{{section.id}} {
+    background-color: {{section.settings.bg_color}};
+  }
+  #latest_blog-{{section.id}} .box .box-heading{
+    {%- if section.settings.heading_color != blank -%}
+    color: {{section.settings.heading_color}};
+    {%- endif -%}
+    font-size: {{section.settings.heading_fontsize | append: "px"}};
+    font-weight: {{section.settings.heading_fontweight}}!important;
+    {%- if section.settings.heading_border_color != blank -%}
+    border-bottom-color: {{section.settings.heading_border_color}};
+    {%- endif -%}
+  }
+</style>
+<div class="inner_container">
+<div data-placement_fullwidth="{%- if section.settings.placement_fullwidth -%}1{%- else -%}0{%- endif -%}"
+     id="latest_blog-{{section.id}}" class="{% if section.settings.placement_fullwidth %}section-placement-fullwidth{% endif %} product-tab-arrow-beside latest_blog_content{%- if section.settings.visible_on_mobile == false -%}{{" hidden-xs"}}{%- endif-%}" data-section-id="{{ section.id }}" data-section-type="latest-blog">
+	{%- assign _lblog_mobile		= section.settings.visible_on_mobile -%}
+    {%- assign _lblog_heading	= section.settings.lblog_head -%}
+  
+    {%- assign _lblog_order		= 1 -%}
+  
+  
+  
+  <div class="box blog-module box-no-advanced{%- if _lblog_mobile == false -%}{{' '}}hidden-xs hidden-sm{%- endif -%}" data-order="{{_lblog_order}}"{{' '}}{%-if section.settings.bg_color != blank-%}style="margin-top:0;"{%-endif-%}>
+            <div class="box-heading">{{_lblog_heading}}</div>
+            <div class="strip-line"></div>
+            <div class="news v2 default2 row blog-slick-slider">
+              {% for block in section.blocks %}
+              {% assign blog_handle = block.settings.article %}
+              {% assign article = articles[blog_handle] %}
+               <div class="col-sm-4 col-xs-12">
+                  <div class="blog_media">
+                     <div class="blog_img short___img">
+                       {%- assign img_url = block.settings.meta_img | img_url: 'master' -%}
+   					   <img data-src="{{img_url}}" class="shop_mokee_img b-lazy b-loaded lazy_img">
+                     </div>
+                     <div class="blog-body" onclick="window.location.href = '{{article.url}}'">
+                        <div class="blog_detail">
+                           <div class="date-published">
+                              <span>{{ article.published_at | date: "%d %b %Y" }}</span>
+                           </div>
+                           <h1 class="blog__title">
+                             <a href="{{article.url}}">
+                               {{ article.title | link_to: article.url }}
+                             </a>
+                            </h1>
+                           <div class="blog__content short___desc">
+                             <span>
+                               {{block.settings.meta_desc}}
+                             </span>
+                           </div>
+                           <div class="blog_comments">
+                              <span class="blog-comment">
+                                <i class="fa fa-comment" aria-hidden="true"></i>
+                                <span>{{- article.comments_count -}}</span></span>
+                              <a href="{{article.url}}" class="share_link">
+                                <i class="fa fa-share" aria-hidden="true"></i>
+                              </a>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+              {% endfor %}
+               
+            </div>
+         </div>
+      </div>
+</div>
+
+
+{% schema %}
+  {
+    "name": "Home Blogs",
+	"class": "index-section section-wrapper blog__section",
+    "settings": [
+		{
+          "type": "header",
+          "content": "Layout"
+        },
+  		{
+          "type": "checkbox",
+          "id": "placement_fullwidth",
+          "label": "Force Full Width"
+        },
+		{
+          "type": "checkbox",
+          "id": "visible_on_mobile",
+          "label": "Show on Mobile",
+          "default": true
+        },
+		{
+          "type": "header",
+          "content": "Content"
+        },
+  		{
+          "type": "text",
+          "id": "lblog_head",
+          "label": "Heading"
+        },
+		
+		{
+			"type" :"header",
+			"content": "Styling"
+		},
+		{
+            "type": "color",
+            "id": "bg_color",
+            "label": "Background"
+        },
+		{
+			"type" :"header",
+			"content": "- Heading"
+		},
+		{
+            "type": "color",
+            "id": "heading_color",
+            "label": "Color"
+        },
+		{
+            "type": "color",
+            "id": "heading_border_color",
+            "label": "Border Color"
+        },
+        {
+          "type": "range",
+          "id": "heading_fontsize",
+          "min": 10,
+          "max": 70,
+          "step": 1,
+          "unit": "px",
+          "label": "FontSize",
+          "default": 38
+        },
+        {
+          "type": "range",
+          "id": "heading_fontweight",
+          "min": 100,
+          "max": 900,
+          "step": 100,
+          "label": "FontWeight",
+          "default": 600
+        }
+	],
+	"blocks": [
+      {
+        "type": "article",
+        "name": "Article",
+        "settings": [
+          {
+            "id": "article",
+            "type": "article",
+            "label": "Add Article"
+          },
+		  {
+            "id": "meta_img",
+            "type": "image_picker",
+            "label": "Article meta img"
+          },
+          {
+            "id": "meta_desc",
+            "type": "textarea",
+            "label": "Meta description"
+          }
+        ]
+      }
+    ],
+	"presets": [
+		{
+          "name": "Home Blogs",
+          "category": "Content",
+          "settings": {
+              "visible_on_mobile": true,
+              "lblog_head": "mokee Blog"
+          }
+		}
+	]
+  }
+{% endschema %}
+
+
+
+
+

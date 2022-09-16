@@ -1,0 +1,114 @@
+<header class="header-type-2 header-type-7">
+  <div class="background-header"></div>
+  <div class="slider-header">
+  <div class="shadow_line"></div>
+    <!-- Top of pages -->
+    <div id="top" class="{%- if settings.header_layout == '1' -%}full-width{%- elsif settings.header_layout == '4' -%}fixed3 fixed2{%- elsif settings.header_layout == '3' -%}fixed2{%- else -%}fixed{%- endif -%}">
+      <div class="background-top"></div>
+      <div class="background">
+        <div class="shadow"></div>
+        <div class="pattern">
+          <div class="top-bar">
+            <div class="container">
+              <!-- Links -->
+              <ul class="menu">
+                {%- if shop.customer_accounts_enabled -%}
+                <li><a href="/account">{{ 'general.top.my_account' | t }}</a></li>
+                {%- endif -%}
+                {%- if settings.wishlist_enable -%}
+                <li><a href="/apps/iwish" id="wishlist-total">{{ 'general.top.wishlist' | t }}</a></li>
+                {%- endif -%}
+                <li><a href="/cart">{{ 'general.cart_info.cart' | t }}</a></li>
+                <li><a href="/checkout">{{ 'general.cart_info.checkout' | t }}</a></li>
+              </ul>
+              <!-- Currency & Language -->
+              {%- include 'currencies-switcher' -%}
+            </div>
+          </div>
+          <div class="container">
+            <div class="row">
+              <!-- Header Left -->
+              <div class="col-sm-4" id="header-left">		
+                <!-- Logo -->
+                {%- include "header-logo" -%}
+              </div>
+              <!-- Header Right -->
+              <div class="col-sm-8 orderable" id="header-right">
+                {%- section 'header-top-block' -%}
+                <!-- Search -->
+                <form action="/search" method="get" role="search" class="search_form hide">
+                  <div class="button-search">{%- include "search-icon" with "form" -%}</div>
+                  <input type="search" name="q"  class="input-block-level search-query" id="search_query" placeholder="{{ 'search.general.placeholder' | t }}">
+                  <div id="autocomplete-results" class="autocomplete-results"></div>
+                  <input type="hidden" name="type" value="product" />
+                </form>
+                {%- if settings.wishlist_enable -%}
+                <a href="/apps/iwish" class="my-wishlist1">Wishlist</a>
+                {%- endif -%}
+                {%- if shop.customer_accounts_enabled -%}
+                {%comment%}
+                <a href="/account" class="my-account">{%- include "account-icon" -%}</a>
+                {%endcomment%}
+                {% if customer  %}
+                  <a href="/account" class="account_link">My Account</a>
+                  <a href="/account/logout" class="account_link">Sign out</a>
+                {% else %}
+                  <a href="/account/login" class="account_link">Login</a>
+                  {% if shop.customer_accounts_optional %}
+                   <a href="/account/register" class="account_link">Register</a>
+                  {% endif %}
+                {% endif %}
+                {%- endif -%}
+                {%- include 'cartblock' with 'header' -%}
+              </div>
+            </div>
+          </div>
+          {%- assign megamenu_type_having_2ndMenu = '4,5,6,9,14,19,29' | split: ',' -%}
+          {%- if megamenu_type_having_2ndMenu contains settings.advanced_megamenu_type -%}
+          <div class="container container-megamenu2 orderable">
+            {%- endif -%}
+            <!-- Menu -->
+            <div  class="megamenu-background">
+              <div class="">
+                <div class="overflow-megamenu container1">
+                  <div class="row mega-menu-modules">
+                    {%- section 'header-menu1' -%}
+                    {%- section 'header-menu2' -%}
+                  </div>
+                </div>
+              </div>
+            </div>
+          {%- if megamenu_type_having_2ndMenu contains settings.advanced_megamenu_type -%}
+          </div>
+          {%- endif -%}
+          {%- comment -%}MEGAMENU2{%- endcomment -%}
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  {%if settings.show_flash %}
+  {% if template == 'collection' or template == 'collection.variant_collection' or template == 'page.sub-collections'%}
+  <div class="collection_flash_message text-center" style="background:{{settings.flash_bgcolor}}; color:{{settings.flash_textcolor}};">
+    <div class="container">
+      <div class="flash_heading" style="font-size:{{settings.flash_font_size_heading}}; font-weight:{{settings.flash_heading_font_weight}}">
+         {{settings.flash_heading}}
+      </div>
+      <div class="flash_content" style="font-size:{{settings.flash_content_font_size}}; font-weight:{{settings.flash_content_font_weight}}">
+         {{settings.flash_content}}
+      </div>
+    </div>
+  </div>
+  {%endif%}
+  {%endif%}
+  <!-- Slider -->
+  <div id="slider" class="{%- if settings.slideshow_layout == '1' -%}full-width{%- elsif settings.slideshow_layout == '4' -%}fixed3 fixed2{%- elsif settings.slideshow_layout == '3' -%}fixed2{%- else -%}fixed{%- endif -%}">
+    <div class="background-slider"></div>
+    <div class="background">
+      <div class="shadow"></div>
+      <div class="pattern orderable">
+        {%- include 'header-slideshow' -%}
+      </div>
+    </div>
+  </div>
+</header>

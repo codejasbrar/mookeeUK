@@ -1,0 +1,110 @@
+<div class="inner_container">
+{%- if settings.sb_blog_placement == 'left' -%}
+<div id="sidebar" class="col-md-3 col-sm-12{% if settings.sb_blog_mobile %} hidden-sm hidden-xs{% endif %}">
+  {%- include 'sidebar-blog' -%}
+</div>
+{%- endif -%}
+
+<div id="col-main" class=" content-with-background blog-page{% if settings.sb_blog_placement != '' %} col-md-9{% else %} col-md-12{% endif %} col-sm-12">
+  {%- paginate blog.articles by settings.blog_pagination_limit -%}
+  {%- if blog.articles.size > 0 -%}
+  <div class="posts">
+    {%- for article in blog.articles -%}
+    
+    <div class="col-sm-4 col-xs-12">
+      <div class="blog_media" onclick="window.location.href = '{{article.url}}'">
+        
+         <div class="blog_img short___img">
+            {{article.content}}
+            <img alt="Blog 1 " src="https://cdn.shopify.com/s/files/1/0255/4029/6738/files/B4.jpg?3798" class="hide">
+            <img alt="{{article.title}}" src="{{article.image.src | img_url: '350x300', crop: 'top'}}" class="hide"/>
+          </div>
+        
+        <div class="blog-body">
+          {%- if article.tags.size > 0 -%}
+          <div class="tags">
+            {%- for tag in article.tags limit:2 -%}
+            {{tag | link_to_add_tag: tag}}
+            {%- endfor -%}
+          </div>
+          {%- endif -%}
+          <div class="blog_detail">
+            <div class="date-published">
+              <span>{{ article.published_at | date: "%d %b %Y" }}</span>
+            </div>
+            <h2 class="blog__title"><a href="{{article.url}}">{{article.title}}</a></h2>
+            <div class="blog__content short___desc"><span>
+                {{ article.content | strip_html | truncatewords: 10 }}
+			</span></div>
+            <div class="blog_comments">
+              <span class="blog-comment"><i class="fa fa-comment" aria-hidden="true"></i><span>{{- article.comments_count -}}</span></span>
+              <a href="{{article.url}}" class="share_link"><i class="fa fa-share" aria-hidden="true"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    {%- comment -%}
+    <div class="post">
+      <div class="post-content">
+        {%- if article.image -%}
+        <div class="post-media">
+          <img alt="{{article.title | escape}}" src="{{article.image.src | img_url: '1200x679', crop: 'top'}}" />
+        </div>
+        {%- endif -%}
+        {%- if article.tags.size > 0 -%}
+        <div class="tags">
+          {%- for tag in article.tags limit:2 -%}
+          {{tag | link_to_add_tag: tag}}
+          {%- endfor -%}
+        </div>
+        {%- endif -%}
+        <div class="date-published">{{article.published_at | date: "%b %d, %Y"}}</div>
+        <h2 class="post-title">
+          <a href="{{article.url}}">{{article.title}}</a>
+        </h2>
+        <div class="post-description">
+          {%- if article.excerpt != '' -%}
+          {{article.excerpt}}
+          {%- else -%}
+          {{article.content | strip_html | truncatewords: 20}}
+          {%- endif -%}
+        </div>
+        <a href="{{article.url}}" class="button-more">{{'blogs.general.read_more' | t}}</a>
+      </div>       
+    </div>
+    {%- endcomment -%}
+    {%- endfor -%}
+  </div>
+  {%- if settings.blog_pagination_type == "1" -%}
+  {%- include 'pagination' -%}
+  {%- else -%}
+  <div class="pagination-ajax">
+    <a href="javascript:void(0);" data-page="2" id="load-more" data-loading-text="{{'blogs.general.loading' | t}}" class="button">{{'blogs.general.load_more' | t}}</a>
+  </div>
+  {%- endif -%}
+  {%- else -%}
+  <p class="empty">{{ 'blogs.general.no_acticles' | t }}</p>
+  <div class="buttons">
+    <div class="pull-right"><a href="{{shop.url}}" class="btn btn-primary">{{'blogs.general.continue' | t}}</a></div>
+  </div>
+  {%- endif -%}
+  {%- endpaginate -%}
+</div>
+
+{%- if settings.sb_blog_placement == 'right' -%}
+<div id="sidebar" class="col-md-3 col-sm-12{% if settings.sb_blog_mobile %} hidden-sm hidden-xs{% endif %}">
+  {%- include 'sidebar-blog' -%}
+</div>
+{%- endif -%}
+</div>  
+<style>
+.blog_main_banner img {
+    width: 100% !important;
+}
+img.shogun-image {
+  max-height: 170px;
+  height: 170px;
+}  
+</style>

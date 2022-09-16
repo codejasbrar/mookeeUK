@@ -1,0 +1,49 @@
+<div class="container">
+          		<h1 class="top_headings">{{ settings.top_heading }}</h1>
+          		<h2 class="sub_headings">{{ settings.sub_heading }}</h2>
+          		<p class="description">{{ settings.pre_mess }}</p>
+        	</div>
+        <div class="thank_from">
+        	<div class="thank_from_content">
+              <h3 class="form_h">{{ settings.form_text }}</h3>
+              <div class="checkout-newsletter-footer">
+                    <form method="post" action="/contact#contact_form" id="contact_form" accept-charset="UTF-8" class="contact-form mailing-form">
+                      <div class="group-input">
+
+                        <input type="hidden" name="contact[tags]" value="newsletter">
+                        <input placeholder="Enter First Name*" type="text" required="required" name="name" class="email" />
+                        <input placeholder="Enter Email Address*" type="email" required="required" name="contact[email]" class="email"  value="{% if customer %}{{ customer.email }}{% endif %}"/>
+                        <div class="bottom_checkbox">
+                          <div class="term_condition">
+                            <label class="check_box"> <a target="_blank" href="/pages/privacy-policy">{{ settings.policy_text }}</a>
+                          <input type="checkbox">
+                          <span class="checkmark"></span>
+                        </label>
+                            
+                          </div>
+                        </div>
+                        <div class="form_btn">
+                        <button type="submit" class="footer-button subscribe" name="commit" id="Subscribe">Submit</button>
+                        </div>
+                        </div>
+                    </form>
+                <div class="checkout_shere">
+                <ul class="social-icons-bottoms" id="social-icons-1564147501250">
+                  <li>Share</li>
+                <li><a href="https://www.facebook.com/wearemokee"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="http://www.pinterest.com/mokeedesign/"><i class="fa fa-pinterest"></i></a></li
+                    ><li><a href="https://www.instagram.com/wearemokee/"><i class="fa fa-instagram"></i></a></li>
+              </ul>
+                </div>
+                    {%comment%}
+                    <form action="{{settings.popup_mailchimp_action}}" method="post" class="mailing-form" name="mc-embedded-subscribe-form" target="_blank">
+                      <div class="group-input">      
+                        <input placeholder="Enter Name" type="text" required="required" name="name" class="email" />
+                        <input placeholder="{{'general.footer.mailchimp.email_address' | t}}" type="email" required="required" name="EMAIL" class="email" />
+                        <button type="submit" class="footer-button subscribe">Submit</button>
+                      </div>
+                    </form>
+                    {%endcomment%}
+                </div>
+            </div>
+        </div>

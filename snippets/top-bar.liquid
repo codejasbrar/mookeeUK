@@ -1,0 +1,94 @@
+{%- if settings.tbar_use -%}
+<div class="tbar-wrapper{% unless settings.tbar_mobile %} row1 hidden-xs{% endunless %}">
+  <div class="standard-body main-top-bar">
+    <div class="full-width">
+      <div class="container tbar_inner">
+        <div class="tbar row">
+          {%- if settings.tbar_cls == '1' -%}
+          {%- assign _colClass = 'col-sm-12' -%}
+          {%- elsif settings.tbar_cls == '2' -%}
+          {%- assign _colClass = 'col-sm-6' -%}
+          {%- else -%}
+          {%- assign _colClass = 'col-sm-4' -%}
+          {%- endif -%}
+          <div class="{{_colClass}}{% unless settings.tbar_cls == '3' %} text-left{% endunless %} top__bar inner">
+            <div class="background">
+              {%- assign list = linklists[settings.tbar_linklist] -%}
+              {%- if settings.tbar_linklist -%}
+              <ul class="top_link__list">
+                {%- for link in list.links -%}
+       			<li><a href="{{link.url}}">{{link.title}}</a></li>
+        		{%- endfor -%}
+              </ul>
+              {%- endif-%}
+              <p class="tbar_text">{{settings.tbar_text_1}}</p>
+              {%- if settings.tbar_img_use_1 -%}
+              <img src="{{ 'tbar_img_1.png' | asset_url }}" alt="{{ settings.tbar_text_1 | strip_html }}" class="tbar_img"/>
+              {%- endif -%}
+             </div>
+             <form action="/search" method="get" role="search" class="search_form mob_hide">
+                  <div class="button-search">{%- include "search-icon" with "form" -%}</div>
+                  <input type="search" name="q"  class="input-block-level search-query" id="search_query" placeholder="{{ 'search.general.placeholder' | t }}">
+                  <div id="autocomplete-results" class="autocomplete-results"></div>
+                  <input type="hidden" name="type" value="product" />
+             </form>
+            <div class="switcher_start">
+             
+             {% comment %}
+             <div class="language_switcher">
+                <select name="language" onchange="location = this.value;">
+                 <option value="" selected>Select Language</option>
+                 <option value="https://en.mokee.eu/">EN</option>
+                 <option value="https://fr.mokee.eu/">FR</option>
+                 <option value="https://pl.mokee.eu/">IT</option>
+                </select>
+              </div>
+              {% endcomment %}
+                <div class="language_switcher_section">
+                <span class="select_lang">Select Language <i class=" fa fa-chevron-down"></i>
+                 <ul class="language_list">
+                   <li><a href="https://en.mokee.eu/"><span class="lang_icon" style="background:url('{{'lang_icon_3.jpg' | asset_img_url : 'master'}}')"></span><span>EN</span></a></li>
+                   <li><a href="https://fr.mokee.eu/"><span class="lang_icon" style="background:url('{{'lang_icon_2.jpg' | asset_img_url : 'master'}}')"></span><span>FR</span></a></li>
+                    <li><a href="https://pl.mokee.eu/"><span class="lang_icon" style="background:url('{{'lang_icon_1.jpg' | asset_img_url : 'master'}}')"></span><span>PL</span></a></li>
+                 
+                  </ul>
+                </span>
+               </div>
+            </div>
+           
+            {% comment %}
+            <form action="/search" method="get" role="search" class="search_form mob_hide">
+                  <div class="button-search">{%- include "search-icon" with "form" -%}</div>
+                  <input type="search" name="q"  class="input-block-level search-query" id="search_query" placeholder="{{ 'search.general.placeholder' | t }}">
+                  <div id="autocomplete-results" class="autocomplete-results"></div>
+                  <input type="hidden" name="type" value="product" />
+             </form>
+            {% endcomment %}
+          </div>
+          {%- if settings.tbar_cls == '2' or settings.tbar_cls == '3' -%}
+          <div class="{{_colClass}} text-center">
+            <div class="background">
+              {%- if settings.tbar_img_use_2 -%}
+              <img src="{{ 'tbar_img_2.png' | asset_url }}" alt="{{ settings.tbar_text_2 | strip_html }}" class="lazy" />
+              {%- endif -%}
+              <p>{{settings.tbar_text_2}}</p>
+            </div>
+          </div>
+          {%- endif -%}
+          {%- if settings.tbar_cls == '3' -%}
+          <div class="{{_colClass}} text-right">
+            <div class="background">
+              {%- if settings.tbar_img_use_3 -%}
+              <img src="{{ 'tbar_img_3.png' | asset_url }}" alt="{{ settings.tbar_text_3 | strip_html }}" class="lazy"/>
+              {%- endif -%}
+              <p>{{settings.tbar_text_3}}</p>
+            </div>
+          </div>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{%- endif -%}
+

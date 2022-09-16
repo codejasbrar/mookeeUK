@@ -1,0 +1,166 @@
+
+<div id="content" class="col-md-12 center-column content-with-background">
+  {% comment %}
+    Collections are listed here.
+  {% endcomment %}
+
+  {% capture uses_minimal_framework %}{% include 'product-loop' %}{% endcapture %}
+
+  {% if uses_minimal_framework contains 'Liquid error' %}
+    {% assign uses_minimal_framework = false %}
+    {% assign grid_item_width = 'large--one-quarter large-up--one-quarter medium--one-third medium-up--one-third small--one-half large--col-3 medium--col-4 small--col-6' %}
+  {% else %}
+    {% assign uses_minimal_framework = true %}
+    {% assign grid_item_width = 'span3' %}
+  {% endif %}
+
+  {% assign image_size = 'large' %}
+
+  {% if linklists[page.handle].links.size > 0 %}
+
+    {% assign number_of_links = 0 %}
+    <div id="col-main" class="center-column content-with-background">  
+    <div class="categories-wall clearfix">
+
+      {% for link in linklists[page.handle].links %}
+
+        {% if link.type == 'collection_link' %}
+
+          {% comment %}
+          If we have a collection link.
+          {% endcomment %}   
+
+          {% assign collection = link.object %}
+          {% assign number_of_links = number_of_links | plus: 1 %}
+
+
+
+
+          <div class="col-sm-3">
+            <div class="category-wall">
+              <div class="image">
+                <a href="{{link.url}}">
+                  {%- if collection.image -%}
+                  <img src="{{collection | img_url: 'large'}}" alt="{{link.title | escape}}" />
+                  {%- else -%}
+                  {% assign product = collection.products.first %}
+                  <img src="{{product | img_url: 'large'}}" alt="{{link.title | escape }}" />
+                  {%- endif -%}
+                </a>
+              </div>
+              <h3><a href="{{link.url}}">{{link.title}}</a></h3>
+              <ul>
+                <li>
+                  {% case link.title %}
+                    {% when 'Mini Cots (120x60)' %}
+                       {{settings.no_of_product_1}}
+                    {% when 'Cots Beds (140x70)' %}
+                       {{settings.no_of_product_2}}
+                    {% when 'WoolNests' %}
+                        {{settings.no_of_product_3}}
+                    {% when 'Accessories & Linen' %}
+                  		{{settings.no_of_product_4}}
+                     {% when 'Changing Tables' %}
+                          {{settings.no_of_product_5}}
+                     {% when 'Nursery Furniture' %}
+                          {{settings.no_of_product_6}}
+                     {% when 'Shelving' %}
+                          {{settings.no_of_product_7}}
+                     {% when 'Storage' %}
+                          {{settings.no_of_product_8}}
+                      {% when 'Baby Textiles' %}
+                          {{settings.no_of_product_9}}
+                      {% when 'Cot Bedding' %}
+                          {{settings.no_of_product_10}}
+                      {% when 'Play Accessories' %}
+                          {{settings.no_of_product_11}}
+                      {% when 'Feeding & Bathing' %}
+                          {{settings.no_of_product_12}}
+                    {% else %}
+                       {{collection.products_count}} {{collection.products_count | pluralize: 'collections.general.product', 'collections.general.products' | t}}
+                  {% endcase %} 
+                  </li>
+              </ul>
+              <a href="{{link.url}}" class="more-categories">{{'collections.general.more_products' | t}}</a>
+            </div>
+          </div>
+
+
+          {% if uses_minimal_framework %}
+            {% cycle 'clear-item': '', '', '', '<div style="clear:both"></div>' %}
+          {% endif %}
+
+        {% elsif link.type == 'product_link' %}
+
+          {% assign product = link.object %}
+          {% assign number_of_links = number_of_links | plus: 1 %}
+
+
+
+
+          <div class="col-sm-3">
+            <div class="category-wall">
+              <div class="image">
+                <a href="{{link.url}}">
+                  
+                  <img src="{{product | img_url: 'large'}}" alt="{{link.title | escape}}" />
+                  
+                  
+                </a>
+              </div>
+              <h3><a href="{{product.url}}">{{link.title}}</a></h3>
+              <ul>
+                <li>
+                  
+                              1 Product
+                    
+                  </li>
+              </ul>
+              <a href="{{product.url}}" class="more-categories">View Product</a>
+            </div>
+          </div>
+
+
+        {% endif %}
+
+      {% endfor %}
+
+    </div>
+  </div>
+    {% if number_of_links == 0 %}
+
+    <div class="grid">
+      <div class="grid__item grid-item rte text-center">
+        <p>
+          There are no links of type <i>Collection</i> in your <b>{{ page.title }}</b> link list.
+          Go ahead and <a href="/admin/link_lists/{{ linklists[page.handle].id }}" target="_blank">edit your link list</a> to use links that point to collections.
+        </p>
+      </div>
+    </div>
+
+    {% endif %}
+
+  {% else %}
+
+  <div class="grid">
+    <div class="grid__item grid-item rte text-center">
+      <p>
+        You do not have a link list with a handle set to <kbd>{{ page.handle }}</kbd>, or you do and it's empty. 
+        Go ahead and create a link list called <b>{{ page.title }}</b> on your <a href="/admin/links" target="_blank">Navigation page</a> and populate that link list with links that point to collections, to see collections listed here.
+        Make sure the link list also has a handle set to <kbd>{{ page.handle }}</kbd>.
+      </p>
+    </div>
+  </div>
+
+  {% endif %}
+</div>
+
+
+
+<style>
+  kbd { 
+    background-color: #FBFBE4;
+    padding: 1px 4px;
+    border-radius: 3px;
+  }
+</style>

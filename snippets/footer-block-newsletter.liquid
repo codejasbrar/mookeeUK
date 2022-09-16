@@ -1,0 +1,38 @@
+<div class="newsletter newsletter-footer-{{block.settings.type}}" {{ block.shopify_attributes }}>
+  {%- if block.settings.footer_newsletter_heading != '' -%}
+  <h4 class="title">{{block.settings.footer_newsletter_heading}}</h4>
+  <div class="strip-line"></div>
+  {%- endif -%}
+  <div class="clearfix default-newsletter">
+    {%- if block.settings.footer_newsletter_caption != '' -%}<p>{{block.settings.footer_newsletter_caption}}</p>{%- endif -%}
+    {%- if settings.popup_mailchimp_action != '' -%}
+    
+{% form 'customer' %}
+    <div class="group-input">
+      {% if form.posted_successfully? %}
+      <p class="form--success">Thank you for subscribed to our newsletter</p>
+      {% endif %}  
+
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <input placeholder="Enter Name" type="text" required="required" name="contact[first_name]" class="email" />
+        <input placeholder="{{'general.footer.mailchimp.email_address' | t}}" type="email" required="required" name="contact[email]" class="email"  value="{% if customer %}{{ customer.email }}{% endif %}"/>
+        <div class="bottom_checkbox">
+          <div class="term_condition"><input type="checkbox" class="term-condition" required checked>
+            <span><a target="_blank" href="/pages/privacy-policy"> I accept the privacy policy</a> and <a target="_blank" href="/pages/terms-and-conditions">T&C</a></span>
+          </div>
+    	</div>
+        <button type="submit" class="footer-button subscribe" name="commit" id="Subscribe">Submit</button>
+      </div>
+    {% endform %}
+    {%comment%}
+    <form action="{{settings.popup_mailchimp_action}}" method="post" class="mailing-form" name="mc-embedded-subscribe-form" target="_blank">
+      <div class="group-input">      
+        <input placeholder="Enter Name" type="text" required="required" name="name" class="email" />
+        <input placeholder="{{'general.footer.mailchimp.email_address' | t}}" type="email" required="required" name="EMAIL" class="email" />
+        <button type="submit" class="footer-button subscribe">Submit</button>
+      </div>
+    </form>
+    {%endcomment%}
+    {%- endif -%}
+  </div>
+</div>

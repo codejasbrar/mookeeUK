@@ -1,0 +1,89 @@
+{% if section.settings.banner_section_enable %}
+<div class="custom_icon_banner">
+  <div class="container">
+    
+    <div class="icon_box_container">
+     <hr class="top_border">
+    <div class="inner_container">
+    {% if section.blocks.size > 0 %}
+    {% for block in section.blocks limit: section.blocks.size %}
+    <div class="col-md-3">
+     <div class="box_inner">
+      <div class="img__sec">
+        <img class="icon_img lazy_img" data-src="{{ block.settings.image | img_url: 'master' }}" alt="{{ block.settings.image.alt }}" >
+      </div>
+     
+      <div class="text-center">
+        <h4 class="banner__title">{{ block.settings.title }}</h4>
+        <h5 class="banner__subtitle">{{ block.settings.sub_title }}</h5>
+      </div>
+      </div>
+    </div>
+    {% endfor %}
+    {% endif %}
+    </div>
+  </div>
+  </div>
+</div>
+{% endif %}
+{% schema %}
+{
+	"name": "Icon Section",
+	"class": "index-section icon__section",
+	
+	"settings": [
+		{
+			"type": "header",
+			"content": "Icon Section"
+		},
+		{
+			"type": "checkbox",
+			"id": "banner_section_enable",
+			"label": "Show?",
+			"default": true
+		}
+	],
+	"blocks": [
+		{
+			"type": "banner_section",
+			"name": "Icon Block",
+			"settings": [
+				{
+					"type": "text",
+					"id": "title",
+					"label": "Title"
+				},
+				{
+					"type": "textarea",
+					"id": "sub_title",
+					"label": "Sub title"
+				},
+				{
+					"type": "image_picker",
+					"id": "image",
+					"label": "icon image"
+				}
+				
+			]
+		}
+	],
+	"presets": [
+		{
+			"name": "Icon section",
+			"category": "Icon Section",
+			"blocks": [
+				{
+					"type": "banner_section"
+				},
+				{
+					"type": "banner_section"
+				}
+			]
+		}
+	]
+}
+{% endschema %}
+{% stylesheet %}
+{% endstylesheet %}
+{% javascript %}
+{% endjavascript %}

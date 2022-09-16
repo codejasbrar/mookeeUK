@@ -1,0 +1,98 @@
+{% if section.settings.banner_section_enable %}
+<div class="custom__banner" style="background: url({{ section.settings.bg_image | img_url: 'master' }});">
+  <img src="{{ section.settings.bg_image | img_url: 'master' }}" class="custombanner_img hide">
+  <div class="container">
+    <div class="inner_container">
+    {% if section.settings.bg_overlay %}
+  <div class="bg_overlay"></div>
+  {% endif %}
+    <div class="col-sm-6">
+     <div class="box__inner">
+      <div class="img__sec">
+        <img src="{{ section.settings.image | img_url: 'master' }}" alt="{{ block.settings.image.alt }}" class="icon_img">
+      </div>
+     
+      <div class="text-left">
+        <p class="banner___heading color_white">{{ section.settings.heading}}</p>
+        <h1 class="banner___title color_white">{{ section.settings.title }}</h1>
+        <h5 class="banner___subtitle color_white">{{ section.settings.sub_title }}</h5>
+        <a class="btn cta color_white" href="{{ section.settings.btn_link }}">{{ section.settings.btn_text }}</a>
+      </div>
+      </div>
+    </div>
+    </div>
+  </div>
+  
+</div>
+{% endif %}
+{% schema %}
+{
+	"name": "Custom Banner",
+	"class": "index-section custom___banner",
+	
+	"settings": [
+		{
+			"type": "header",
+			"content": "Icon Section"
+		},
+		{
+			"type": "checkbox",
+			"id": "banner_section_enable",
+			"label": "Show?",
+			"default": true
+		},
+		{
+			"type": "checkbox",
+			"id": "bg_overlay",
+			"label": "Show Overlay?",
+			"default": true
+		},
+		{
+            "type": "image_picker",
+            "id": "bg_image",
+            "label": "Background image"
+        },		
+        {
+            "type": "text",
+            "id": "heading",
+            "label": "Heading"
+        },
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+        },
+        {
+            "type": "textarea",
+            "id": "sub_title",
+            "label": "Sub title"
+        },
+		{
+            "type": "text",
+            "id": "btn_text",
+            "label": "Button text"
+        },
+		{
+            "type": "url",
+            "id": "btn_link",
+            "label": "Button link"
+        },
+        {
+            "type": "image_picker",
+            "id": "image",
+            "label": "icon image"
+        }
+	],
+	
+	"presets": [
+		{
+			"name": "Custom Banner",
+			"category": "Banners"
+		}
+	]
+}
+{% endschema %}
+{% stylesheet %}
+{% endstylesheet %}
+{% javascript %}
+{% endjavascript %}

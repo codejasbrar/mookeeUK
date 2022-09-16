@@ -1,0 +1,232 @@
+{%- capture contentForQuerystring -%}{{ content_for_header }}{%- endcapture -%}
+{%- assign pUrl = contentForQuerystring | split:'"pageurl":"' | last | split:'"' | first | split:'.myshopify.com' | last |
+   replace:'\/','/' | 
+   replace:'%20',' ' | 
+   replace:'\u0026','&'
+-%}
+{%- assign per_page = settings.collection_limit -%}
+{%- assign aView =  pUrl | split : "view=" -%}
+{%- if aView.size > 1 and aView[1] != blank-%}
+{%- assign per_page = aView[1] | plus: 0  -%}
+{%- endif -%}
+{%- assign tmp =  shop.url | append: collection.url | append: "/" -%}
+{%- assign tmp_url = canonical_url | replace : tmp, ""  -%}
+{%- assign a_tmp_url = tmp_url | split: "/" -%}
+
+<div class="container">
+<input class="collection-canonical_url" type="hidden" data-url="collections/{{- collection.handle -}}" data-parts="{{- a_tmp_url.size -}}" value="{{tmp_url}}">
+
+<div data-section-id="{{ section.id }}" data-section-type="collection-template" data-view="{{per_page}}">
+  {%- if settings.sb_collection_placement == 'left' -%}
+  <div id="sidebar" class="col-md-3 col-sm-12{% if settings.sb_collection_mobile %} hidden-sm hidden-xs{% endif %}">
+    {%- include 'sidebar-collection' -%}
+  </div>
+  {%- endif -%}
+  {%- paginate collection.products by per_page -%}
+  <div id="col-main" class="center-column content-without-background collection-page{% if settings.sb_collection_placement != '' %} col-md-9{% else %} col-md-12{% endif %} col-sm-12{% if settings.shop_pagination != '' %} hide-pagination{% endif %}">
+    <div id="mfilter-content-container" class="{%- if settings.collection_list_grid == '0' -%}list{%- else -%}grid{%- endif -%}">
+      {%- if collection.image or collection.description != blank -%}
+      <div class="category-info clearfix">
+        {%- if collection.image -%}<div class="image"><img src="{{collection.image | img_url: 'small'}}" alt="{{collection.title | escape}}" /></div>{%- endif -%}
+        {%- if collection.description -%}{{collection.description}}{%- endif -%}
+      </div>
+      {%- endif -%}
+      {%- include 'collection-filter' -%}
+      <div class="collection_filter_section">
+        
+        <ul class="filter_ul">
+          <li><a href="/collections" class="btn transparent_btn">Show All</a></li>
+          {% comment %}
+          {% capture coll_handle%}{{collection.handle}}{% endcapture %}
+          {% for tag in collections[coll_handle].all_tags limit:4%}
+               <li><a href="/{{ tag }}">{{ tag }}</a></li> 
+          {% endfor %}
+          {% endcomment %}
+          
+          {% comment %}
+          {% if collection.handle == "cots" %}
+          <li><a href="/collections/cots" class="btn filled_btn">Cots</a></li>
+          <li><a href="/collections/mattresses" class="btn filled_btn">Mattresses</a></li>
+          <li><a href="/collections/cots" class="btn filled_btn">Cot Beds</a></li>
+          <li><a href="/collections/cot-accessories" class="btn filled_btn">Cot Accessories</a></li>
+          {%endif%}
+          {% endcomment %}
+          {% if collection.handle == 'all'%}
+          <li><a href="/collections/cots" class="btn filled_btn">Cots</a></li>
+          <li><a href="/collections/moses-baskets" class="btn filled_btn">Moses Baskets</a></li>
+          <li><a href="/collections/nursery-furniture" class="btn filled_btn">Nursery Furniture</a></li>
+          <li><a href="/collections/accessories" class="btn filled_btn">Accessories</a></li>
+          {% endif %}
+          {% comment %}<li><a href="#" class="btn filled_btn filter_btn">Select Price</a></li>{% endcomment %}
+          
+          <li class="color_filter_select">
+            <span  class="btn filled_btn filter_btn click_button">Choose by Colour  <i class="custom_icons fa fa-chevron-down"></i></span>
+           
+            <div class="box mfilter-box box-no-advanced collection_f_custom">
+              <div class="box-content mfilter-content">
+                {%- for i in (1..1) -%}
+                {%- assign tmp = 'filtering_' | append:i -%}
+                {%- assign multi_choice = 'multi_choice_' | append:i -%}
+                {%- if settings[tmp] -%}
+                <div class="column" data-multi_choice="{{ settings[multi_choice] }}">
+                  {%- assign tmp = 'filtering_heading_' | append:i -%}
+                  {%- assign cat_item = settings[tmp] -%}
+                  {%- assign cat_item_down = cat_item | downcase  | replace: ' ', '_' -%}
+                  {%- assign tmp = 'filtering_filters_' | append:i -%}
+                  {%- assign filters = settings[tmp] | strip_newlines | split: ',' -%}
+                  <div class="advanced-filter filter_container {{cat_item_down}}">
+                    <ul class="fields_item">
+                      {%- if cat_item_down contains 'color' or cat_item_down contains 'colour' -%}
+                      {%- assign file_extension = '.png' -%}
+                      {%- for custom_tag in filters -%}
+                      <li class="filter-image{% unless collection.tags contains custom_tag %} hide{% endunless %}">
+                        <div class="field{% if current_tags contains custom_tag %} active{% endif %}">
+                          <input id="{{cat_item_down}}_{{custom_tag | handleize}}" type="checkbox" value="{{custom_tag | handleize}}" class="filter hide"{% if current_tags contains custom_tag %} checked="checked"{% endif %} />
+                          <label for="{{cat_item_down}}_{{custom_tag | handleize}}" class="img" title="{{custom_tag | remove_first: cat_item | remove: '_'}}">{{custom_tag | remove_first: cat_item | remove: '_'}}</label>
+                        </div>
+                      </li>
+                      {%- endfor -%}
+                      {%- else -%}
+                      {%- for custom_tag in filters -%}
+                      <li{% unless collection.tags contains custom_tag %} class="hide"{% endunless %}>
+                        <div class="field label-checkbox{% if current_tags contains custom_tag %} active{% endif %}">
+                          <input id="{{cat_item_down}}_{{custom_tag | handleize}}" type="checkbox" value="{{custom_tag | handleize}}" class="filter checkbox"{% if current_tags contains custom_tag %} checked="checked"{% endif %} />
+                          <label for="{{cat_item_down}}_{{custom_tag | handleize}}" class="name">{{custom_tag | remove_first: cat_item | remove: '_'}}</label>
+                        </div>
+                      </li>
+                      {%- endfor -%}
+                      {%- endif -%}
+                    </ul>
+                  </div>
+                </div>
+                {%- endif -%}
+                {%- endfor -%}
+              </div>
+            </div>
+         </li>
+         
+         <li>
+           <div class="sort advanced-sortby ">
+            {%- assign sort_by = collection.sort_by | default: collection.default_sort_by -%}
+            <select class="field orderby filters-toolbar__input--sort btn filled_btn filter_btn ">
+              {% if sort_by == collection.default_sort_by %}
+              <option value="title-ascending" selected="selected">Sort Products</option>
+              {% if collection.default_sort_by != 'best-selling' %}
+              <option value="best-selling"{% if sort_by == "best-selling" %} selected="selected"{% endif %}>{{ 'collections.sorting.best_selling' | t }}</option>
+              {% endif %}
+              {% if collection.default_sort_by != 'price-ascending' %}
+              <option value="price-ascending"{% if sort_by == "price-ascending" %} selected="selected"{% endif %}>{{ 'collections.sorting.price_ascending' | t }}</option>
+              {% endif %}
+              {% if collection.default_sort_by != 'price-descending' %}
+              <option value="price-descending"{% if sort_by == "price-descending" %} selected="selected"{% endif %}>{{ 'collections.sorting.price_descending' | t }}</option>
+              {% endif %}
+              {% else %}
+              <option value="best-selling"{% if sort_by == "best-selling" %} selected="selected"{% endif %}>{{ 'collections.sorting.best_selling' | t }}</option>
+              <option value="price-ascending"{% if sort_by == "price-ascending" %} selected="selected"{% endif %}>{{ 'collections.sorting.price_ascending' | t }}</option>
+              <option value="price-descending"{% if sort_by == "price-descending" %} selected="selected"{% endif %}>{{ 'collections.sorting.price_descending' | t }}</option>
+              {% endif %}
+            </select>
+            <i class="custom_icons fa fa-chevron-down"></i>
+            <input class="collection-header__default-sort" type="hidden" value="{{ collection.default_sort_by }}">
+          </div>
+          </li>
+        
+        </ul>
+        
+      </div>
+      <div id="sandbox">
+        {%- if collection.products.size > 0 -%}
+        <div class="product-list products">
+          {%- for product in collection.products -%}
+          {%- include 'product-item2' -%}
+          {%- endfor -%}
+        </div>
+        {%- if settings.ctemplate_type == "promo" -%}
+        <div class="product-grid products">
+          <div class="row">
+            
+           
+            
+            
+            <!--- Variant product Start ---->
+            
+           
+            {% for product in collection.products %}
+       
+              {% for variant in product.variants %}
+
+                <div class="col-sm-4 col-xs-6 product-item">
+                          <div class="product_grid_item ">
+                            {%- include 'product-item' -%}
+
+
+                          </div>
+                        </div>
+              {% endfor %}
+           
+            {% endfor %}  
+			
+                       
+            <!--- Variant product End ---->
+            <div class="collection_bottom_text_content"></div>
+          </div>
+        </div>
+        {%- else -%}
+        {%- assign grid_row = settings.collection_product_per_pow2 | plus:0 -%}
+        {%- assign grid_class = 3 -%}
+        {%- if settings.collection_product_per_pow2 == '6' -%}{%- assign grid_class = 2 -%}{%- elsif settings.collection_product_per_pow2 == '5' -%}{%- assign grid_class = 25 -%}{%- elsif settings.collection_product_per_pow2 == '3' -%}{%- assign grid_class = 4 -%}{%- endif -%}
+        <div class="product-grid products">
+          <div class="row">
+            {%- assign row_fluid = 0 -%}
+            {%- for product in collection.products -%}
+            <div class="col-sm-{{grid_class}} col-xs-6 product-item">
+              {%- include 'product-item' -%}
+            </div>
+            {%- endfor -%}
+          </div>
+        </div>
+        {%- endif -%}
+        {%- else -%}
+        <p class="empty">{{ 'collections.general.no_products' | t }}</p>
+        <div class="buttons">
+          <div class="pull-right"><a href="{{shop.url}}" class="btn btn-primary">{{'collections.general.continue' | t}}</a></div>
+        </div>
+        {%- endif -%}
+      </div>
+      {%- case settings.shop_pagination -%}
+      {%- when '1' -%}
+      <div class="itg_ajax_load_button itg_ajax_load_more_btn animated fadeIn">
+        <a class="button" href="#" data-processing="0" data-loading-items="{{ 'general.pagination.loading_items' | t | escape }}" data-no-more="{{ 'general.pagination.no_more' | t | escape }}">
+          <img src="https://cdn.shopify.com/s/files/1/0255/4029/6738/files/page_loader.gif" class="load_img">
+        </a>
+      </div>
+      {%- include 'pagination' -%}
+      {%- when '2' -%}
+      <div class="itg_ajax_load_button itg_ajax_load_more_hidden animated fadeIn">
+        <a class="button" href="#" data-processing="0" data-loading-items="{{ 'general.pagination.loading_items' | t | escape }}" data-no-more="{{ 'general.pagination.no_more' | t | escape }}">
+          <img src='https://cdn.shopify.com/s/files/1/0255/4029/6738/files/page_loader.gif' class="load_img">
+        </a>
+      </div>
+      {%- include 'pagination' -%}
+      {%- else -%}
+      {%- include 'pagination' -%}
+      {%- endcase -%}
+      {%- include 'spinner' -%}
+    </div>
+  </div>
+  {%- endpaginate -%}
+  {%- if settings.sb_collection_placement == 'right' -%}
+  <div id="sidebar" class="col-md-3 col-sm-12{% if settings.sb_collection_mobile %} hidden-sm hidden-xs{% endif %}">
+    {%- include 'sidebar-collection' -%}
+  </div>
+  {%- endif -%}
+</div>
+</div>
+ {{temaplate.name}}
+{% schema %}
+  {
+    "name": "Collection Page",
+    "settings": []
+  }
+{% endschema %}
+

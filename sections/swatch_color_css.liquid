@@ -1,0 +1,115 @@
+<style>
+{%- for block in section.blocks -%}
+    {%- case block.type -%}
+  	{%- when 'text' -%}
+    .drawer_selection .swatch-value-container[data-color="{{- block.settings.title -}}"] .swatch-image,.drawer_selection .swatch-value-container[data-color="{{ block.settings.title | camelcase}}"] .swatch-image,.drawer_selection .swatch-value-container[data-color="{{ block.settings.title | capitalize }}"] .swatch-image,
+    .drawer_selection .swatch-value-container[data-value-text="{{- block.settings.title -}}"] .swatch-image,.drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title | camelcase}}"] .swatch-image,.drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title | capitalize }}"] .swatch-image,
+    .drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title }} "] .swatch-image, .drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title | camelcase }} "] .swatch-image,.drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title | capitalize }} "] .swatch-image,
+    .drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title }}  "] .swatch-image,.drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title | camelcase}}  "] .swatch-image,.drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title | capitalize }}  "] .swatch-image,
+    .drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title }}   "] .swatch-image,.drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title | camelcase}}   "] .swatch-image,.drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title | capitalize }}   "] .swatch-image,
+    .drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title }}    "] .swatch-image,.drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title | camelcase}}    "] .swatch-image,.drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title | capitalize }}    "] .swatch-image,
+    .drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title }}     "] .swatch-image,.drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title | camelcase}}     "] .swatch-image,.drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title | capitalize }}     "] .swatch-image,
+    .drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title }}      "] .swatch-image,.drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title | camelcase}}      "] .swatch-image, .drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title | capitalize }}      "] .swatch-image,
+    .drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title }}       "] .swatch-image,.drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title | camelcase}}       "] .swatch-image,.drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title | capitalize }}       "] .swatch-image,
+    .drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title }}        "] .swatch-image,.drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title | camelcase}}        "] .swatch-image,.drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title | capitalize }}        "] .swatch-image,
+    .drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title }}         "] .swatch-image,.drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title | camelcase}}         "] .swatch-image,.drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title | capitalize }}         "] .swatch-image,
+    .drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title }}          "] .swatch-image,.drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title | camelcase}}          "] .swatch-image,.drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title | capitalize }}          "] .swatch-image
+    .drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title }}           "] .swatch-image,.drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title | camelcase}}           "] .swatch-image,.drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title | capitalize }}           "] .swatch-image
+    .drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title }}            "] .swatch-image,.drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title | camelcase}}            "] .swatch-image,.drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title | capitalize }}            "] .swatch-image
+    .drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title }}             "] .swatch-image,.drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title | camelcase}}             "] .swatch-image,.drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title | capitalize }}             "] .swatch-image
+    .drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title }}              "] .swatch-image,.drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title | camelcase}}              "] .swatch-image,.drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title | capitalize }}              "] .swatch-image
+    .drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title }}               "] .swatch-image,.drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title | camelcase}}               "] .swatch-image,.drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title | capitalize }}               "] .swatch-image
+    .drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title }}                "] .swatch-image,.drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title | camelcase}}                "] .swatch-image,.drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title | capitalize }}                "] .swatch-image
+    .drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title }}                 "] .swatch-image,.drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title | camelcase}}                 "] .swatch-image,.drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title | capitalize }}                 "] .swatch-image
+    .drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title }}                  "] .swatch-image,.drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title | camelcase}}                  "] .swatch-image,.drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title | capitalize }}                  "] .swatch-image
+    .drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title }}                   "] .swatch-image,.drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title | camelcase}}                    "] .swatch-image,.drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title | capitalize }}                  "] .swatch-image
+    .drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title }}                    "] .swatch-image,.drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title | camelcase}}                      "] .swatch-image,.drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title | capitalize }}                  "] .swatch-image
+	.drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title }}                     "] .swatch-image,.drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title | camelcase}}                        "] .swatch-image,.drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title | capitalize }}                  "] .swatch-image
+    .drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title }}                      "] .swatch-image,.drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title | camelcase}}                          "] .swatch-image,.drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title | capitalize }}                  "] .swatch-image
+    .drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title }}                       "] .swatch-image,.drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title | camelcase}}                            "] .swatch-image,.drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title | capitalize }}                  "] .swatch-image
+    .drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title }}                        "] .swatch-image,.drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title | camelcase}}                              "] .swatch-image,.drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title | capitalize }}                  "] .swatch-image
+    .drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title }}                         "] .swatch-image,.drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title | camelcase}}                                "] .swatch-image,.drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title | capitalize }}                  "] .swatch-image
+    .drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title }}                          "] .swatch-image,.drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title | camelcase}}                                  "] .swatch-image,.drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title | capitalize }}                  "] .swatch-image
+    .drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title }}                           "] .swatch-image,.drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title | camelcase}}                                    "] .swatch-image,.drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title | capitalize }}                  "] .swatch-image
+    .drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title }}                            "] .swatch-image,.drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title | camelcase}}                                      "] .swatch-image,.drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title | capitalize }}                  "] .swatch-image
+    .drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title }}                             "] .swatch-image,.drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title | camelcase}}                                        "] .swatch-image,.drawer_selection .swatch-value-container[data-value-text="{{ block.settings.title | capitalize }}                  "] .swatch-image
+
+    {
+        background: {{- block.settings.swatch_color -}};
+    }
+  
+    .product-item-option label.img.btooltip[title='{{- block.settings.title -}}'],.product-item-option label.img.btooltip[title='{{ block.settings.title | camelcase }}'],.product-item-option label.img.btooltip[title='{{ block.settings.title | capitalize }}'] {
+        background: {{- block.settings.swatch_color -}} !important;
+    }
+    .product-item-option label.img.btooltip[title='{{- block.settings.title -}}'] i,.product-item-option label.img.btooltip[title='{{ block.settings.title | camelcase }}'] i,.product-item-option label.img.btooltip[title='{{ block.settings.title | capitalize }}'] i{
+        background-image: none!important;
+    }
+    .product-item-option .swatch .swatch-element label.img {
+        padding: 0px;
+    }
+    .product-item-option .swatch .swatch-element label{
+        padding: 0px;
+    }
+  	{%- when 'image' -%}
+     {%- assign swatch_img = block.settings.swatch_image | img_url: 'master' -%}
+    .product-item-option label.img.btooltip[title='{{- block.settings.title -}}'], .product-item-option label.img.btooltip[title='{{ block.settings.title | camelcase }}'], .product-item-option label.img.btooltip[title='{{ block.settings.title | capitalize }}'] {
+        background-image: url('{{swatch_img}}') !important;
+        background-color: transparent!important;
+        background-size: 120%!important;
+    }
+    .product-item-option label.img.btooltip[title='{{- block.settings.title -}}'] i,.product-item-option label.img.btooltip[title='{{ block.settings.title | camelcase }}'] i,.product-item-option label.img.btooltip[title='{{ block.settings.title | capitalize }}'] i{
+        background-image: url('{{swatch_img}}') !important;
+        background-color: transparent!important;
+        background-size: 120%!important;
+    }
+    {%- else -%}
+    {%- endcase -%}
+{%- endfor -%}
+</style>
+{% schema %}
+  {
+    "name": "Swatch Color",
+    "settings": [
+		{
+			"type": "header",
+			"content": "Icon Section"
+		}
+	],
+	"blocks": [
+		{
+			"type": "text",
+			"name": "Color",
+			"settings": [
+                {
+                  "type": "text",
+                  "id": "title",
+                  "label": "Color title"
+                },
+                {
+                  "type": "color",
+                  "id": "swatch_color",
+                  "label": "Select color"
+                }
+			]
+		},
+		{
+			"type": "image",
+			"name": "Swatch image",
+			"settings": [
+				{
+					"type": "text",
+					"id": "title",
+					"label": "Title"
+				},
+				{
+					"type": "image_picker",
+					"id": "swatch_image",
+					"label": "Swatch image"
+				}
+			]
+		}
+		
+		
+	]
+  }
+{% endschema %}

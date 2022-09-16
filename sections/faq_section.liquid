@@ -1,0 +1,104 @@
+<div class="faq-wrapper"  data-section-id="{{ section.id }}" data-section-type="faq-section">
+  
+  <div class="collection_filter_section">
+   <ul class="filter_ul">
+     {%- for block in section.blocks -%}
+       {%- case block.type -%}
+        {%- when 'category' -%}
+       		<li><a href="javascript:void(0);" class="btn transparent_btn" id="heading_{{- block.settings.category_heading | handle -}}">{{- block.settings.category_heading -}}</a></li>
+       {%- else -%}
+       {%- endcase -%}
+     {%- endfor -%}
+   </ul>
+  </div>
+  
+  {%- for block in section.blocks -%}
+  {%- case block.type -%}
+      {%- when 'category' -%}
+  	  <div class="faq_heading heading__{{forloop.index}}" id="content_{{- block.settings.category_heading | handle -}}">{{- block.settings.category_heading -}}</div>
+      {%- when 'subcategory' -%}
+      {%- if block.settings.subcategory_heading != blank -%}<div class="faq_subtitle">{{- block.settings.subcategory_heading -}}</div>{%- endif -%}
+      {%- when 'question_answer' -%}
+      <div class="panel panel-faq" {{ block.shopify_attributes }}>
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#questions" href="#answer-{{block.id}}"
+               aria-expanded="false" class="collapsed">
+              {{- block.settings.question -}}
+            </a>
+          </h4>
+        </div>
+        <div id="answer-{{block.id}}" class="panel-collapse collapse" aria-expanded="false">
+          <div class="panel-body">
+            {{- block.settings.answer -}}
+          </div>
+        </div>
+      </div>
+      {%- else -%}
+      {%- endcase -%}
+ 
+{%- endfor -%}
+</div> 
+{%- if page.handle == 'help-faqs' %}
+<script src="{{ 'jquery-1.9.1.min.js' | asset_url }}"></script>
+<script>
+  {%- for block in section.blocks -%}
+       {%- case block.type -%}
+        {%- when 'category' -%}
+          jQuery("#heading_{{- block.settings.category_heading | handle -}}").click(function() {
+                  jQuery('html, body').animate({
+                      scrollTop: jQuery("#content_{{- block.settings.category_heading | handle -}}").offset().top - 70
+                  }, 2000);
+              });
+  		{%- else -%}
+      {%- endcase -%}
+  {%- endfor -%}
+</script>
+{%- endif -%}
+{% schema %}
+  {
+    "name": "FAQ Page",
+    "settings": [],
+	"blocks": [
+		{
+			"type": "category",
+			"name": "Category",
+			"settings": [
+                {
+                  "type": "text",
+                  "id": "category_heading",
+                  "label": "Category Name"
+                }
+			]
+		},
+		{
+			"type": "subcategory",
+			"name": "Subcategory",
+			"settings": [
+                {
+                  "type": "text",
+                  "id": "subcategory_heading",
+                  "label": "Subcategory Name"
+                }
+			]
+		},
+		{
+			"type": "question_answer",
+			"name": "Questions & Answer",
+			"settings": [
+				{
+					"type": "richtext",
+					"id": "question",
+					"label": "Question"
+				},
+				{
+					"type": "richtext",
+					"id": "answer",
+					"label": "Answer"
+				}
+			]
+		}
+		
+	]
+  }
+{% endschema %}

@@ -1,0 +1,88 @@
+{%- if settings.footer_section_column_layout != '' -%}
+{%- assign column_grid_version = settings.footer_section_column_layout | split: '_' -%}
+{%- assign column_version = '' -%}
+{%- if column_grid_version.size > 1 -%}{%- assign column_version = column_grid_version.last -%}{%- endif -%}
+{%- assign column_grid = settings.footer_section_column_layout | remove: '_2' | split: '-' -%}
+<div class="row">
+  {%- if settings.use_custom_design %}
+  {%- for i_grid in (1..column_grid.size) -%}
+    {% case i_grid %}
+    {% when 1 %}
+  <div class="col-sm-4 mob_newsletter_section">
+      <div class="row">
+      	{%- section 'footer-center-column4' -%}
+      </div>
+    </div>
+   <div class="col-sm-8 mon_nav_link">
+    {%- section 'footer-center-mob' -%}
+     <div class="footer_icons_section">
+     <img class="top_i lazy_img" src="{{settings.main_logo | img_url: 'master'}}" data-src="{{settings.main_logo | img_url: 'master'}}" style="max-width:200px;" title="MokeeUK" alt="MokeeUK">
+   <img class="icon_pay lazy_img" src="{{ 'lPAY2.jpg' | asset_img_url : 'master' }}" data-src="{{ 'lPAY2.jpg' | asset_img_url : 'master' }}">
+     </div>
+     <div class="footer_bottoms">
+       <div class="left">
+        <img class="icon_pay lazy_img" src="{{ 'lPAY1.jpg' | asset_img_url : 'master' }}" data-src="{{ 'lPAY1.jpg' | asset_img_url : 'master' }}">
+       </div>
+       <div class="right">
+       <ul class="social-icons" >
+		 <li><a href="https://www.facebook.com/wearemokee"><i class="fa fa-facebook"></i></a></li>
+         <li><a href="http://www.pinterest.com/mokeedesign/"><i class="fa fa-pinterest"></i></a></li>
+         <li><a href="https://www.instagram.com/wearemokee/"><i class="fa fa-instagram"></i></a></li></ul>
+       </div>
+     </div>
+  </div>
+    {%comment%}
+  	<div class="col-sm-12 destop_view">
+      <div class="row">
+        
+        {%- section 'footer-center-column1' -%}
+        {% when 2 %}
+        {%- section 'footer-center-column2' -%}
+        {% when 3 %}
+        {%- section 'footer-center-column3' -%}
+      </div>
+    </div>
+    {%endcomment%}
+    <div class="col-sm-8 destop_view">
+      <div class="row">
+        {%- section 'footer-center-column1' -%}
+        {% when 2 %}
+        {%- section 'footer-center-column2' -%}
+        {% when 3 %}
+        {%- section 'footer-center-column3' -%}
+      </div>
+    </div>
+    {% when 4 %}
+    <div class="col-sm-4 hide_mobs ">
+      <div class="row">
+      	{%- section 'footer-center-column4' -%}
+      </div>
+    </div>
+    {% when 5 %}
+    {%- section 'footer-center-column5' -%}
+    {% else %}
+    {% endcase %}
+  {%- endfor -%}
+  {%- else -%}
+  {%- for i_grid in (1..column_grid.size) -%}
+    {% case i_grid %}
+    {% when 1 %}
+    {%- section 'footer-center-column1' -%}
+    {% when 2 %}
+    {%- section 'footer-center-column2' -%}
+    {% when 3 %}
+    {%- section 'footer-center-column3' -%}
+    {% when 4 %}
+    {%- section 'footer-center-column4' -%}
+    {% when 5 %}
+    {%- section 'footer-center-column5' -%}
+    {% else %}
+    {% endcase %}
+  {%- endfor -%}
+  {%- endif -%}
+</div>
+{%- endif -%}
+
+
+
+ 

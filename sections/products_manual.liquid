@@ -1,0 +1,66 @@
+<div class="faq-wrapper product_manual_page"  data-section-id="{{ section.id }}" data-section-type="faq-section">
+  
+  <div class="collection_filter_section ">
+   <ul class="filter_ul">
+     {%- for block in section.blocks -%}
+       
+       		<li><a href="javascript:void(0);" class="btn transparent_btn" id="heading_{{- block.settings.title | handle -}}">{{- block.settings.title -}}</a></li>
+       
+     {%- endfor -%}
+   </ul>
+  </div>
+  
+  {%- for block in section.blocks -%}
+  
+      
+      {%- if block.settings.title != blank -%}
+      <div class="faq_subtitle heading__{{forloop.index}}" id="content_{{- block.settings.title | handle -}}">
+        <a href='{{- block.settings.url -}}' target="_blank">{{- block.settings.title -}}</a>
+      </div>
+      {%- endif -%}
+      
+      
+ 
+{%- endfor -%}
+</div> 
+{%- if page.handle == 'product-manuals' %}
+<script src="{{ 'jquery-1.9.1.min.js' | asset_url }}"></script>
+<script>
+  {%- for block in section.blocks -%}
+      
+          jQuery("#heading_{{- block.settings.title | handle -}}").click(function() {
+                  jQuery('html, body').animate({
+                      scrollTop: jQuery("#content_{{- block.settings.title | handle -}}").offset().top - 70
+                  }, 2000);
+              });
+  		
+  {%- endfor -%}
+</script>
+{%- endif -%}
+{% schema %}
+  {
+    "name": "Product Manual Page",
+    "settings": [],
+	"blocks": [
+		
+		{
+			"type": "Productmanual",
+			"name": "Productmanual",
+			"settings": [
+				{
+					"type": "text",
+					"id": "title",
+					"label": "Title"
+				},
+				{
+					"type": "textarea",
+					"id": "url",
+					"label": "Pdf url",
+					"info": "uplaod pdf file in settings>>files and get url"
+				}
+			]
+		}
+		
+	]
+  }
+{% endschema %}

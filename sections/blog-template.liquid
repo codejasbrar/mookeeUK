@@ -1,0 +1,191 @@
+<section>
+  <div style="background-image: url('{{section.settings.background_img | img_url:'1000x', crop: 'center'}}');">
+  <div class="title">
+    <h2>{{section.settings.banner_text}}</h2>
+  </div>
+</div>
+<h1 class="h1-heading">{{section.settings.blog_text}}</h1>
+<p class="content">Category1  Category2  Category3  Category4</p>
+
+<div class="rb-row2">
+  {% for block in section.blocks %}
+              {% assign blog_handle = block.settings.article %}
+    
+   {% assign blog_handle = block.settings.article %}
+              {% assign article = articles[blog_handle] %}
+               <div class="col-sm-6 col-xs-12">
+                  <div class="blog_media">
+                     <div class="blog_img short___img">
+                       {%- assign img_url = block.settings.meta_img | img_url: 'master' -%}
+   					   <img data-src="{{img_url}}" class="shop_mokee_img b-lazy b-loaded lazy_img">
+                     </div>
+                     <div class="blog-body" onclick="window.location.href = '{{article.url}}'">
+                        <div class="blog_detail">
+                           <div class="date-published">
+                              <span>{{ article.published_at | date: "%d %b %Y" }}</span>
+                           </div>
+                           <h1 class="blog__title">
+                             <a href="{{article.url}}">
+                               {{ article.title | link_to: article.url }}
+                             </a>
+                            </h1>
+                           <div class="blog__content short___desc">
+                             <span>
+                               {{block.settings.meta_desc}}
+                             </span>
+                           </div>
+                           <div class="blog_comments">
+                              <span class="blog-comment">
+                                <i class="fa fa-comment" aria-hidden="true"></i>
+                                <span>{{- article.comments_count -}}</span></span>
+                              <a href="{{article.url}}" class="share_link">
+                                <i class="fa fa-share" aria-hidden="true"></i>
+                              </a>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+    
+ 
+  {% endfor %}
+  </div>
+ 
+  <div class="rb-row1">
+    
+     <div class="rightcolumn">
+       <div class="right-card">
+         {% assign blog_handle = section.settings.article1 %}
+   	   
+       <span style="height:80px; width: 80px;"> <img src="{{ section.settings.meta_img1 | img_url: '200x' }}" style="height:66px" ></span>
+     <span class="right-text" onclick="window.location.href = '{{article.url}}'">
+      {{section.settings.desc}}...
+       </span>
+       </div>
+        <div class="right-card">
+         
+   	   {% assign blog_handle = section.settings.article2 %}
+       <span style="height:80px; width: 80px;"> <img src="{{ section.settings.meta_img2 | img_url: '200x' }}" style="height:66px" ></span>
+     <span class="right-text" onclick="window.location.href = '{{article.url}}'">
+      {{section.settings.desc1}}
+       </span>
+       </div>
+  </div>
+  <div class="rightcolumn">
+    <div class="right-card">
+      <span class="fakeimg" style="height:80px; width: 80px;">Image</span>
+      <span class="right-text"><p>Some text about me in culpa qui officia deserunt mollit anim...</p></span>
+    </div>
+    <div class="right-card">
+      <span class="fakeimg" style="height:80px; width: 80px;">Image</span>
+      <span class="right-text"><p>Some text about me in culpa qui officia deserunt mollit anim...</p></span>
+    </div>
+    <div class="right-card">
+      <span class="fakeimg" style="height:80px; width: 80px;">Image</span>
+      <span class="right-text"><p>Some text about me in culpa qui officia deserunt mollit anim...</p></span>
+    </div>
+    <div class="right-card">
+      <span class="fakeimg" style="height:80px; width: 80px;">Image</span>
+      <span class="right-text"><p>Some text about me in culpa qui officia deserunt mollit anim...</p></span>
+    </div>.
+    
+  </div>
+  </div>
+
+</section>
+{% schema %}
+  {
+    "name": "blogs",
+    "settings": [
+	{
+        "type": "image_picker",
+        "id": "background_img",
+        "label": "banner Image"
+	  },
+      {
+        "type": "text",
+        "id": "banner_text",
+        "label": "banner title"
+	  },
+		{
+        "type": "text",
+        "id": "blog_text",
+        "label": "blog Heading"
+	  },
+		{
+            "id": "article1",
+            "type": "article",
+            "label": "Add Article"
+          },
+		  {
+            "id": "meta_img1",
+            "type": "image_picker",
+            "label": "Article meta img"
+          },
+          {
+            "id": "desc",
+            "type": "textarea",
+            "label": "Meta description"
+          },
+		  {
+            "id": "article2",
+            "type": "article",
+            "label": "Add Article"
+          },
+		  {
+            "id": "meta_img2",
+            "type": "image_picker",
+            "label": "Article meta img"
+          },
+          {
+            "id": "desc1",
+            "type": "textarea",
+            "label": "Meta description"
+          }
+
+],
+"blocks": [
+      {
+        "type": "article",
+        "name": "Article",
+        "settings": [
+          {
+            "id": "article",
+            "type": "article",
+            "label": "Add Article"
+          },
+		  {
+            "id": "meta_img",
+            "type": "image_picker",
+            "label": "Article meta img"
+          },
+          {
+            "id": "meta_desc",
+            "type": "textarea",
+            "label": "Meta description"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}
+
+<style>
+  .blog_media{
+  	margin-bottom:40px;
+  }
+
+
+
+  .blog-body{
+        border: 1px solid #d2d2d2 !important;
+  }
+  
+  .blog_img.short___img img {
+    height: 216px;
+    border-radius: 5px 5px 0 0;
+    border: 1px solid #d2d2d2;
+    border-bottom: 0px !important;
+}
+</style>
+
