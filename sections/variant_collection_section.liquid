@@ -144,27 +144,15 @@
         {%- if settings.ctemplate_type == "promo" -%}
         <div class="product-grid products">
           <div class="row">
-            
-           
-            
-            
             <!--- Variant product Start ---->
-            
-           
-            {% for product in collection.products %}
-       
-              {% for variant in product.variants %}
-
+        {% comment %}    {% for variant in product.variants %} {% endfor %}{% endcomment %}       
+              {% for product in collection.products %}
                 <div class="col-sm-4 col-xs-6 product-item">
-                          <div class="product_grid_item ">
-                            {%- include 'product-item' -%}
-
-
-                          </div>
-                        </div>
+                    <div class="product_grid_item ">
+                      {%- include 'product-item' -%}
+                    </div>
+                </div>
               {% endfor %}
-           
-            {% endfor %}  
 			
                        
             <!--- Variant product End ---->
