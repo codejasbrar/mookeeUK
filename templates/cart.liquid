@@ -23,7 +23,8 @@
         </thead>
         <tbody>
           {%- for item in cart.items -%}
-          <tr class="{% include 'mw_PO_cart', code: 'class' %} th_pb_cart_line" {% include 'mw_PO_cart' with item, code: 'style' %} data-idth="{{ item.id }}" data-indexth="{{ forloop.index }}">
+          {% comment %}<tr class="{% include 'mw_PO_cart', code: 'class' %} th_pb_cart_line" {% include 'mw_PO_cart' with item, code: 'style' %} data-idth="{{ item.id }}" data-indexth="{{ forloop.index }}">{% endcomment %}
+          <tr class="th_pb_cart_line" data-idth="{{ item.id }}" data-indexth="{{ forloop.index }}">
             <td class="text-center cart_img">
               {% include 'mw_PO_cart' with item, code: 'relation' %}
               <a href="{{item.url}}"><img src="{{item | img_url:'medium'}}" alt="{{item.title | escape}}" title="{{item.title | escape}}" class="img-thumbnail" /></a>

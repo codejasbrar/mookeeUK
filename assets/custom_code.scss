@@ -1250,10 +1250,14 @@ img.img__banner {
   font-weight: 600 !important;
 }
 .swatch .swatch-element label.img i {
-  width: 12px!important;
-  height: 12px!important;
+/*   width: 12px!important; */
+/*   height: 12px!important; */
   border: 1px solid #ccc;
 }
+.swatch .swatch-element input.selected + label i {
+    box-shadow: 0px 0px 0px 2px #fff, 0px 0px 0px 4px #17ccc2;
+}
+.product-item-option .swatch .swatch-element{margin: 5px 5px 5px 5px;}
 .swatch .swatch-element label.img {
   min-width: 5px!important;
   border: none;
@@ -3353,7 +3357,7 @@ ul.megamenu>li>.sub-menu>.content>.arrow {
   background: transparent!important;
 }
 .collection_variant_collection .product-item-option.has-swatch-finished {
-  display: none;
+/*   display: none; */
 }
 .show_error {display:none;}
 
