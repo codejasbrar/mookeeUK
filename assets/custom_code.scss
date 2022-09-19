@@ -3763,4 +3763,9 @@ div#edrone--main--pu--container {
 .product-section-wrapper .review .ruk_rating_snippet {
     display: block;
 }
-
+@media only screen and (max-width: 550px) {
+  .swatch .swatch-element label.img.swatch_color_advanced i {
+    width: 40px;
+    height: 40px;
+  }
+}
